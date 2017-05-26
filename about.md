@@ -4,12 +4,4 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
-
-You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jekyll" %} /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+Hi, my name is Gijs Koot. I am a Data Scientist working and living in Amsterdam, at Xomnia, where I split my time between teaching about data analysis and applying it in projects I do for clients. This is a personal blog. I have a MSc. in Mathematics, and my interest at the moment lies with Bayesian Modeling. Get in touch if you're interested! 
