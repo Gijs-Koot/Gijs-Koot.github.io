@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Accountability Hackathon 2017"
-date:   2017-05-30
+date:   2017-05-30 22:30:00 +0200
 categories: hackathon
 ---
 
@@ -21,6 +21,6 @@ Effective spending happens when things get better, and you spend relatively litt
 
 While spending at least is numeric, effectiveness is hard to measure. Perhaps crime rates or the success youth in terms of employment or education?
 
-I'll follow up with a post about the actual event. 
+I'll follow up with a post about the actual event.
 
 PS Talking about effective spending, we are supposed to use a new social platform, created as part of a Horizon2020 program, that you can find on http://nl-spod.routetopa.eu/. I'm just on the fence on government subsidies, especially spending so much time on a platform such as this one seems a bit pointless. Perhaps it's a good exercise for the people involved. But to create a social platform is almost always a bad idea, right?
