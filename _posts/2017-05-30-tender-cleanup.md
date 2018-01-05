@@ -5,11 +5,9 @@ date:   2017-05-30 22:30:00 +0200
 categories: hackathon tender dataset
 ---
 
-_Work in progress_
-
 For the [Accountability hack](https://accountabilityhack.nl/) I am cleaning up data regarding tenders in the Netherlands. These are published on https://www.tenderned.nl/over-tenderned/datasets-aanbestedingen, and this data is in some rough shape. This is a notebook that cleans it up. I will also include a script that does it.   
 
-First, I extract the relevant links to datasets from the page.
+First, I extract the relevant links to datasets from the page. 
 
 
 ```python
@@ -37,7 +35,7 @@ links
 
 
 
-It's useful to have a list of shorter names as well. I use pandas to read all the excel files as `pd.DataFrame`.
+It's useful to have a list of shorter names as well. I use pandas to read all the excel files as `pd.DataFrame`. 
 
 
 ```python
@@ -61,7 +59,7 @@ names
 
 
 
-The colums are not the same among all of the frames, so let's create a heatmap to see what's missing where.
+The colums are not the same among all of the frames, so let's create a heatmap to see what's missing where. 
 
 
 ```python
@@ -81,8 +79,8 @@ all_columns = set(reduce(lambda x, y: x + y, [list(df.columns) for df in frames]
 missing = pd.DataFrame(index=all_columns)
 
 for name, frame in zip(names, frames):
-
-    missing.loc[frame.columns, name] = 1
+    
+    missing.loc[frame.columns, name] = 1 
 
 plt.figure(figsize = (8, 18))
 sns.heatmap(missing)
@@ -96,20 +94,20 @@ sns.heatmap(missing)
 
 
 
-![png](2017-05-30-tender-cleanup_files/2017-05-30-tender-cleanup_7_1.png)
+![png](/assets/images/tender-cleanup_7_1.png)
 
 
-Allright. I don't like the ugly column names, with spaces, and some even have a question mark at the end. WTF? Unfortunately, there is no functionality like `janitor::clean_names` in `R` available in python (anyone?), so I'll hack my own for now.
+Allright. I don't like the ugly column names, with spaces, and some even have a question mark at the end. WTF? Unfortunately, there is no functionality like `janitor::clean_names` in `R` available in python (anyone?), so I'll hack my own for now. 
 
 
 ```python
 import string
 
 def sanitize(name):
-
+    
     t = "".join([c if c in string.ascii_lowercase + string.digits else "_" for c in name.lower()])
     return re.sub(r"_+", "_", t).lstrip("_").rstrip("_")
-
+     
 sanitize(df.columns[-3])
 ```
 
@@ -120,7 +118,7 @@ sanitize(df.columns[-3])
 
 
 
-Now I'll merge the frames, except the one with the different column names, into one, while also sanitizing each frame and adding a reference to the source.
+Now I'll merge the frames, except the one with the different column names, into one, while also sanitizing each frame and adding a reference to the source. 
 
 
 ```python
@@ -149,15 +147,15 @@ tenders.shape
 
 
 
-The first thing I always do in a dataset is checking the id's, and if they're actually unique. Terrible datasets have duplicated id's, many of them, and have all kinds of redundant data. This one, as mentioned earlier, is terrible. Let's count the duplicates and null values in each column to see if we can make something of that.
+The first thing I always do in a dataset is checking the id's, and if they're actually unique. Terrible datasets have duplicated id's, many of them, and have all kinds of redundant data. This one, as mentioned earlier, is terrible. Let's count the duplicates and null values in each column to see if we can make something of that. 
 
 
 ```python
 def count_dupes(col):
     return pd.Series({
-        "duplications": col.duplicated().sum(),
+        "duplications": col.duplicated().sum(), 
         "unique_values": len(col.unique()),
-        "na": col.isnull().sum(),
+        "na": col.isnull().sum(), 
         "na + duplications": (col.duplicated() | col.isnull()).sum()
     })
 
@@ -672,3 +670,5 @@ tenders.apply(count_dupes, axis = 0).T.sort_values("duplications")
   </tbody>
 </table>
 </div>
+
+

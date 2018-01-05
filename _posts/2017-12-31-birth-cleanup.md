@@ -676,5 +676,5 @@ daily_ned[daily_ned.date.dt.year == 2015].set_index('date').geboortes.plot()
 
 
 
-![png](/assets/images/birth-clustering_16_1.png)
+![png](/assets/images/birth-cleanup_16_1.png)
 
