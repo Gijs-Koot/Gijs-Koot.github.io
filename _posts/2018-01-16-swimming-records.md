@@ -17,6 +17,8 @@ This is a tutorial in data cleanup using `pandas`. In one of my trainings, I ask
 
 In this post, I try and answer these. 
 
+---
+
 
 ```python
 import pandas as pd
@@ -26,6 +28,8 @@ import pandas as pd
 
     Populating the interactive namespace from numpy and matplotlib
 
+
+### 1. Getting the data
 
 These swimming records are in HTML tables, and luckily the `pd.read_html` function does work. 
 
@@ -197,34 +201,6 @@ raw.sample(5)
   </thead>
   <tbody>
     <tr>
-      <th>26</th>
-      <td>07 ! 50 m backstroke</td>
-      <td>27.06</td>
-      <td>NaN</td>
-      <td>Zhao Jing</td>
-      <td>China</td>
-      <td>30 July 2009</td>
-      <td>World Championships</td>
-      <td>Italy, Rome ! Rome, Italy</td>
-      <td>[51][52]</td>
-      <td>women</td>
-      <td>long</td>
-    </tr>
-    <tr>
-      <th>59</th>
-      <td>18 ! 400 m individual medley</td>
-      <td>3:55.50</td>
-      <td>NaN</td>
-      <td>Lochte, RyanRyan Lochte</td>
-      <td>United States</td>
-      <td>16 December 2010</td>
-      <td>World Championships</td>
-      <td>United Arab Emirates, Dubai ! Dubai, United Ar...</td>
-      <td>[86]</td>
-      <td>men</td>
-      <td>short</td>
-    </tr>
-    <tr>
       <th>15</th>
       <td>16 ! 200 m individual medley</td>
       <td>1:54.00</td>
@@ -239,31 +215,59 @@ raw.sample(5)
       <td>long</td>
     </tr>
     <tr>
-      <th>42</th>
-      <td>01 ! 50 m freestyle</td>
-      <td>20.26</td>
+      <th>2</th>
+      <td>03 ! 200 m freestyle</td>
+      <td>1:42.00</td>
       <td>NaN</td>
-      <td>Manaudou, FlorentFlorent Manaudou</td>
-      <td>France</td>
-      <td>5 December 2014</td>
+      <td>Biedermann, PaulPaul Biedermann</td>
+      <td>Germany</td>
+      <td>28 July 2009</td>
       <td>World Championships</td>
-      <td>Qatar, Doha ! Doha, Qatar</td>
-      <td>[69]</td>
+      <td>Italy, Rome ! Rome, Italy</td>
+      <td>[13][14]</td>
+      <td>men</td>
+      <td>long</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>08 ! 100 m backstroke</td>
+      <td>48.90</td>
+      <td>NaN</td>
+      <td>Kolesnikov, KlimentKliment Kolesnikov</td>
+      <td>Russia</td>
+      <td>22 December 2017</td>
+      <td>Vladimir Salnikov Cup</td>
+      <td>Russia, Saint Petersburg ! Saint Petersburg, R...</td>
+      <td>[79]</td>
       <td>men</td>
       <td>short</td>
     </tr>
     <tr>
-      <th>90</th>
-      <td>22.1 ! 4×50 m medley relay</td>
-      <td>1:43.27</td>
+      <th>73</th>
+      <td>08 ! 100 m backstroke</td>
+      <td>55.03</td>
       <td>NaN</td>
-      <td>(26.12) Alexandra Margaret de Loof  (28.78) Li...</td>
-      <td>United States</td>
-      <td>7 December 2016</td>
+      <td>Hosszú, KatinkaKatinka Hosszú</td>
+      <td>Hungary</td>
+      <td>4 December 2014</td>
       <td>World Championships</td>
-      <td>Canada, Windsor ! Windsor, Canada</td>
-      <td>[116]</td>
+      <td>Qatar, Doha ! Doha, Qatar</td>
+      <td>[100]</td>
       <td>women</td>
+      <td>short</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>15 ! 200 m butterfly</td>
+      <td>1:48.56</td>
+      <td>NaN</td>
+      <td>le Clos, ChadChad le Clos</td>
+      <td>South Africa</td>
+      <td>5 November 2013</td>
+      <td>World Cup</td>
+      <td>Singapore, Singapore ! Singapore, Singapore</td>
+      <td>[83]</td>
+      <td>men</td>
       <td>short</td>
     </tr>
   </tbody>
@@ -355,6 +359,10 @@ raw.head(2)
 </div>
 
 
+
+---
+
+### 2. Parsing the data in the event and time columns 
 
 The data has a lot of challenging parsing problems. In this post, I use regexes to solve most of those. There are non-breaking spaces, as you cannot see in the table, but it does show if you print separate values as below. There is also a weird `x` character, that you might mistake for an 'x'. I just copied it into the regex formula. 
 
@@ -448,39 +456,39 @@ parsed_events.assign(original = raw.event).sample(5)
   </thead>
   <tbody>
     <tr>
-      <th>44</th>
-      <td>1</td>
-      <td>200</td>
-      <td>freestyle</td>
-      <td>03 ! 200 m freestyle</td>
-    </tr>
-    <tr>
-      <th>9</th>
+      <th>32</th>
       <td>1</td>
       <td>50</td>
-      <td>breaststroke</td>
-      <td>10 ! 50 m breaststroke</td>
-    </tr>
-    <tr>
-      <th>55</th>
-      <td>1</td>
-      <td>100</td>
       <td>butterfly</td>
-      <td>14 ! 100 m butterfly</td>
+      <td>13 ! 50 m butterfly</td>
     </tr>
     <tr>
-      <th>24</th>
-      <td>1</td>
-      <td>800</td>
-      <td>freestyle</td>
-      <td>05 ! 800 m freestyle</td>
+      <th>60</th>
+      <td>4</td>
+      <td>200</td>
+      <td>freestyle relay</td>
+      <td>19.1 ! 4×50 m freestyle relay</td>
     </tr>
     <tr>
-      <th>49</th>
+      <th>73</th>
       <td>1</td>
       <td>100</td>
       <td>backstroke</td>
       <td>08 ! 100 m backstroke</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>1</td>
+      <td>400</td>
+      <td>freestyle</td>
+      <td>04 ! 400 m freestyle</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>1</td>
+      <td>200</td>
+      <td>butterfly</td>
+      <td>15 ! 200 m butterfly</td>
     </tr>
   </tbody>
 </table>
@@ -488,7 +496,7 @@ parsed_events.assign(original = raw.event).sample(5)
 
 
 
-Next up are the times. It is possible to tackle these with `strftime` of some sort, but since the format is flexible, and I'm doing regexes already, let's use those again. 
+Next up are the times. It is possible to tackle these with `strftime`, but since I'm doing regexes already, let's use those again. 
 
 
 ```python
@@ -524,24 +532,24 @@ raw.assign(time_seconds = time_seconds)[["event", "time_seconds"]].sample(10)
   </thead>
   <tbody>
     <tr>
-      <th>11</th>
-      <td>12 ! 200 m breaststroke</td>
-      <td>126.67</td>
+      <th>64</th>
+      <td>22 ! 4×50 m medley relay</td>
+      <td>90.44</td>
     </tr>
     <tr>
-      <th>8</th>
-      <td>09 ! 200 m backstroke</td>
-      <td>111.92</td>
+      <th>92</th>
+      <td>23 ! 4×100 m medley relay</td>
+      <td>225.20</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>34</th>
       <td>15 ! 200 m butterfly</td>
-      <td>111.51</td>
+      <td>121.81</td>
     </tr>
     <tr>
-      <th>10</th>
-      <td>11 ! 100 m breaststroke</td>
-      <td>57.13</td>
+      <th>43</th>
+      <td>02 ! 100 m freestyle</td>
+      <td>44.94</td>
     </tr>
     <tr>
       <th>89</th>
@@ -549,29 +557,29 @@ raw.assign(time_seconds = time_seconds)[["event", "time_seconds"]].sample(10)
       <td>452.85</td>
     </tr>
     <tr>
-      <th>84</th>
-      <td>17 ! 200 m individual medley</td>
-      <td>121.86</td>
+      <th>25</th>
+      <td>06 ! 1500 m freestyle</td>
+      <td>925.48</td>
     </tr>
     <tr>
-      <th>33</th>
-      <td>14 ! 100 m butterfly</td>
-      <td>55.48</td>
+      <th>20</th>
+      <td>01 ! 50 m freestyle</td>
+      <td>23.67</td>
     </tr>
     <tr>
-      <th>81</th>
-      <td>14 ! 100 m butterfly</td>
-      <td>54.61</td>
+      <th>18</th>
+      <td>19 ! 4×200 m freestyle relay</td>
+      <td>418.55</td>
     </tr>
     <tr>
-      <th>76</th>
-      <td>11.1 ! 100 m breaststroke</td>
-      <td>62.36</td>
+      <th>50</th>
+      <td>09 ! 200 m backstroke</td>
+      <td>105.63</td>
     </tr>
     <tr>
-      <th>82</th>
-      <td>15 ! 200 m butterfly</td>
-      <td>119.61</td>
+      <th>72</th>
+      <td>07 ! 50 m backstroke</td>
+      <td>25.67</td>
     </tr>
   </tbody>
 </table>
@@ -579,7 +587,9 @@ raw.assign(time_seconds = time_seconds)[["event", "time_seconds"]].sample(10)
 
 
 
-## Splitting doubled name and location
+---
+
+### 3. Splitting doubled name and location
 
 The record holder names come out of the `html` in an interesting way. The `pd.read_html` function includes the title of the cell, which is the same name, in different order. Instead of splitting the strings on half their length plus one, I use a very explicit backref operator to make sure my assumptions on these data fields are correct. 
 
@@ -637,64 +647,64 @@ parsed_names.assign(original = raw.name).sample(10)
   </thead>
   <tbody>
     <tr>
-      <th>72</th>
-      <td>Medeiros</td>
-      <td>Etiene</td>
-      <td>Medeiros, EtieneEtiene Medeiros</td>
+      <th>26</th>
+      <td>Zhao</td>
+      <td>Jing</td>
+      <td>Zhao Jing</td>
     </tr>
     <tr>
-      <th>59</th>
-      <td>Lochte</td>
-      <td>Ryan</td>
-      <td>Lochte, RyanRyan Lochte</td>
+      <th>45</th>
+      <td>Agnel</td>
+      <td>Yannick</td>
+      <td>Agnel, YannickYannick Agnel</td>
     </tr>
     <tr>
-      <th>46</th>
-      <td>Hackett</td>
-      <td>Grant</td>
-      <td>Hackett, GrantGrant Hackett</td>
+      <th>36</th>
+      <td>Hosszú</td>
+      <td>Katinka</td>
+      <td>Hosszú, KatinkaKatinka Hosszú</td>
     </tr>
     <tr>
-      <th>77</th>
-      <td>Atkinson</td>
-      <td>Alia</td>
-      <td>Atkinson, AliaAlia Atkinson</td>
+      <th>0</th>
+      <td>Cielo</td>
+      <td>César</td>
+      <td>Cielo, CésarCésar Cielo</td>
     </tr>
     <tr>
-      <th>89</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>(1:54.73) Inge Dekker  (1:51.22) Femke Heemske...</td>
+      <th>69</th>
+      <td>Belmonte García</td>
+      <td>Mireia</td>
+      <td>Belmonte García, MireiaMireia Belmonte García</td>
     </tr>
     <tr>
-      <th>29</th>
-      <td>King</td>
-      <td>Lilly</td>
-      <td>King, LillyLilly King</td>
+      <th>5</th>
+      <td>Sun</td>
+      <td>Yang</td>
+      <td>Sun Yang</td>
     </tr>
     <tr>
-      <th>24</th>
-      <td>Ledecky</td>
-      <td>Katie</td>
-      <td>Ledecky, KatieKatie Ledecky</td>
+      <th>80</th>
+      <td>Alshammar</td>
+      <td>Therese</td>
+      <td>Alshammar, ThereseTherese Alshammar</td>
     </tr>
     <tr>
-      <th>31</th>
-      <td>Pedersen</td>
-      <td>Rikke Møller</td>
-      <td>Pedersen, Rikke MøllerRikke Møller Pedersen</td>
+      <th>50</th>
+      <td>Larkin</td>
+      <td>Mitch</td>
+      <td>Larkin, MitchMitch Larkin</td>
     </tr>
     <tr>
-      <th>14</th>
-      <td>Phelps</td>
-      <td>Michael</td>
-      <td>Phelps, MichaelMichael Phelps</td>
+      <th>3</th>
+      <td>Biedermann</td>
+      <td>Paul</td>
+      <td>Biedermann, PaulPaul Biedermann</td>
     </tr>
     <tr>
-      <th>56</th>
-      <td>le Clos</td>
-      <td>Chad</td>
-      <td>le Clos, ChadChad le Clos</td>
+      <th>74</th>
+      <td>Hosszú</td>
+      <td>Katinka</td>
+      <td>Hosszú, KatinkaKatinka Hosszú</td>
     </tr>
   </tbody>
 </table>
@@ -750,34 +760,34 @@ parsed_locations.assign(original = raw.location).sample(5)
   </thead>
   <tbody>
     <tr>
-      <th>46</th>
-      <td>Australia</td>
-      <td>Melbourne</td>
-      <td>Australia, Melbourne ! Melbourne, Australia</td>
-    </tr>
-    <tr>
-      <th>52</th>
+      <th>66</th>
       <td>Germany</td>
       <td>Berlin</td>
       <td>Germany, Berlin ! Berlin, Germany</td>
     </tr>
     <tr>
-      <th>86</th>
-      <td>Denmark</td>
-      <td>Copenhagen</td>
-      <td>Denmark, Copenhagen ! Copenhagen, Denmark</td>
-    </tr>
-    <tr>
-      <th>72</th>
+      <th>42</th>
       <td>Qatar</td>
       <td>Doha</td>
       <td>Qatar, Doha ! Doha, Qatar</td>
     </tr>
     <tr>
-      <th>55</th>
-      <td>Canada</td>
-      <td>Windsor</td>
-      <td>Canada, Windsor ! Windsor, Canada</td>
+      <th>74</th>
+      <td>Qatar</td>
+      <td>Doha</td>
+      <td>Qatar, Doha ! Doha, Qatar</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>Qatar</td>
+      <td>Doha</td>
+      <td>Qatar, Doha ! Doha, Qatar</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>Brazil</td>
+      <td>Rio de Janeiro</td>
+      <td>Brazil, Rio de Janeiro ! Rio de Janeiro, Brazil</td>
     </tr>
   </tbody>
 </table>
@@ -823,6 +833,10 @@ parsed_locations[parsed_locations.country.isnull()]
 
 
 
+---
+
+### 4. Combining the data into a clean set
+
 We have all the separate parts of the dataset and assemble them into a `pd.DataFrame` called `events. 
 
 
@@ -835,8 +849,7 @@ events = parsed_events.join(
     raw[["course", "category", "nationality", "meet"]]
 )
 
-view = events.sample(10)
-view
+events.sample(5)
 ```
 
 
@@ -877,142 +890,14 @@ view
   </thead>
   <tbody>
     <tr>
-      <th>20</th>
-      <td>1</td>
-      <td>50</td>
-      <td>freestyle</td>
-      <td>23.67</td>
-      <td>2017-07-29</td>
-      <td>Hungary</td>
-      <td>Budapest</td>
-      <td>Sjöström</td>
-      <td>Sarah</td>
-      <td>long</td>
-      <td>women</td>
-      <td>Sweden</td>
-      <td>World Championships</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>1</td>
-      <td>200</td>
-      <td>breaststroke</td>
-      <td>126.67</td>
-      <td>2017-01-29</td>
-      <td>Japan</td>
-      <td>Tokyo</td>
-      <td>Watanabe</td>
-      <td>Ippei</td>
-      <td>long</td>
-      <td>men</td>
-      <td>Japan</td>
-      <td>Kosuke Kitajima Cup</td>
-    </tr>
-    <tr>
-      <th>56</th>
-      <td>1</td>
-      <td>200</td>
-      <td>butterfly</td>
-      <td>108.56</td>
-      <td>2013-11-05</td>
-      <td>Singapore</td>
-      <td>Singapore</td>
-      <td>le Clos</td>
-      <td>Chad</td>
-      <td>short</td>
-      <td>men</td>
-      <td>South Africa</td>
-      <td>World Cup</td>
-    </tr>
-    <tr>
-      <th>68</th>
-      <td>1</td>
-      <td>200</td>
-      <td>freestyle</td>
-      <td>110.43</td>
-      <td>2017-08-12</td>
-      <td>Netherlands</td>
-      <td>Eindhoven</td>
-      <td>Sjöström</td>
-      <td>Sarah</td>
-      <td>short</td>
-      <td>women</td>
-      <td>Sweden</td>
-      <td>World Cup</td>
-    </tr>
-    <tr>
-      <th>90</th>
-      <td>4</td>
-      <td>200</td>
-      <td>medley relay</td>
-      <td>103.27</td>
-      <td>2016-12-07</td>
-      <td>Canada</td>
-      <td>Windsor</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>short</td>
-      <td>women</td>
-      <td>United States</td>
-      <td>World Championships</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>1</td>
-      <td>100</td>
-      <td>butterfly</td>
-      <td>49.82</td>
-      <td>2009-08-01</td>
-      <td>Italy</td>
-      <td>Rome</td>
-      <td>Phelps</td>
-      <td>Michael</td>
-      <td>long</td>
-      <td>men</td>
-      <td>United States</td>
-      <td>World Championships</td>
-    </tr>
-    <tr>
-      <th>63</th>
-      <td>4</td>
-      <td>800</td>
-      <td>freestyle relay</td>
-      <td>409.04</td>
-      <td>2010-12-16</td>
-      <td>United Arab Emirates</td>
-      <td>Dubai</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>short</td>
-      <td>men</td>
-      <td>Russia</td>
-      <td>World Championships</td>
-    </tr>
-    <tr>
-      <th>51</th>
-      <td>1</td>
-      <td>50</td>
-      <td>breaststroke</td>
-      <td>25.25</td>
-      <td>2009-11-14</td>
-      <td>Germany</td>
-      <td>Berlin</td>
-      <td>van der Burgh</td>
-      <td>Cameron</td>
-      <td>short</td>
-      <td>men</td>
-      <td>South Africa</td>
-      <td>World Cup</td>
-    </tr>
-    <tr>
-      <th>87</th>
+      <th>86</th>
       <td>4</td>
       <td>200</td>
       <td>freestyle relay</td>
-      <td>93.25</td>
-      <td>2009-12-11</td>
-      <td>Turkey</td>
-      <td>Istanbul</td>
+      <td>93.91</td>
+      <td>2017-12-15</td>
+      <td>Denmark</td>
+      <td>Copenhagen</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>short</td>
@@ -1021,20 +906,68 @@ view
       <td>European Championships</td>
     </tr>
     <tr>
-      <th>85</th>
+      <th>5</th>
       <td>1</td>
-      <td>400</td>
+      <td>1500</td>
+      <td>freestyle</td>
+      <td>871.02</td>
+      <td>2012-08-04</td>
+      <td>United Kingdom</td>
+      <td>London</td>
+      <td>Sun</td>
+      <td>Yang</td>
+      <td>long</td>
+      <td>men</td>
+      <td>China</td>
+      <td>Olympic Games</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>1</td>
+      <td>100</td>
       <td>individual medley</td>
-      <td>258.94</td>
-      <td>2017-08-12</td>
-      <td>Netherlands</td>
-      <td>Eindhoven</td>
-      <td>Belmonte Garcia</td>
-      <td>Mireia</td>
+      <td>50.30</td>
+      <td>2016-08-30</td>
+      <td>Germany</td>
+      <td>Berlin</td>
+      <td>Morozov</td>
+      <td>Vladimir</td>
       <td>short</td>
-      <td>women</td>
-      <td>Spain</td>
+      <td>men</td>
+      <td>Russia</td>
       <td>World Cup</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>1</td>
+      <td>50</td>
+      <td>breaststroke</td>
+      <td>29.40</td>
+      <td>2017-07-30</td>
+      <td>Hungary</td>
+      <td>Budapest</td>
+      <td>King</td>
+      <td>Lilly</td>
+      <td>long</td>
+      <td>women</td>
+      <td>United States</td>
+      <td>World Championships</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>1</td>
+      <td>100</td>
+      <td>freestyle</td>
+      <td>44.94</td>
+      <td>2008-12-13</td>
+      <td>Croatia</td>
+      <td>Rijeka</td>
+      <td>Leveaux</td>
+      <td>Amaury</td>
+      <td>short</td>
+      <td>men</td>
+      <td>France</td>
+      <td>European Championships</td>
     </tr>
   </tbody>
 </table>
@@ -1102,6 +1035,10 @@ plt.title("Number of records in swimming set in each month");
 
 
 Interesting that most records are broken in December. My first hypothesis would be that this has to do with a recent tournament.
+
+---
+
+### 5. Ranking the disciplines on speed
 
 
 ```python
@@ -1550,10 +1487,9 @@ events.to_feather("./data/swimming-records.feather")
 
 Now that we have the data in what looks like a clean format, it is time to turn to the two other questions. 
 
-## Part 2: Analysis
+---
 
-* Give an estimate of how much time a turning point adds to swimming a distance
-* Give an estimate of how much time a start adds to adds to swimming 
+### 6.  Give an estimate of how much time a turning point adds to swimming a distance
 
 For calculating the extra time a turn adds, I use a pivot table. The idea is that I can only really compare the same distances and swimming styles. 
 
@@ -1593,36 +1529,20 @@ view.sample(5)
   </thead>
   <tbody>
     <tr>
-      <th>16</th>
-      <td>100</td>
-      <td>individual medley</td>
-      <td>men</td>
-      <td>NaN</td>
-      <td>50.30</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>200</td>
-      <td>individual medley</td>
-      <td>men</td>
-      <td>114.00</td>
-      <td>109.63</td>
-    </tr>
-    <tr>
-      <th>44</th>
+      <th>46</th>
       <td>800</td>
-      <td>freestyle</td>
+      <td>freestyle relay</td>
       <td>men</td>
-      <td>452.12</td>
-      <td>443.42</td>
+      <td>418.55</td>
+      <td>409.04</td>
     </tr>
     <tr>
-      <th>28</th>
-      <td>200</td>
+      <th>37</th>
+      <td>400</td>
       <td>freestyle relay</td>
-      <td>women</td>
+      <td>mixed</td>
+      <td>199.60</td>
       <td>NaN</td>
-      <td>93.58</td>
     </tr>
     <tr>
       <th>13</th>
@@ -1631,6 +1551,22 @@ view.sample(5)
       <td>women</td>
       <td>55.48</td>
       <td>54.61</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>200</td>
+      <td>medley relay</td>
+      <td>mixed</td>
+      <td>NaN</td>
+      <td>97.17</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>1500</td>
+      <td>freestyle</td>
+      <td>men</td>
+      <td>871.02</td>
+      <td>848.06</td>
     </tr>
   </tbody>
 </table>
@@ -1642,6 +1578,8 @@ view.sample(5)
 ```python
 view["additional_turnpoints"] = ((view.distance / 25) - 1) - ((view.distance / 50) - 1)
 view["additional_time_per_turn"] = (view.short - view.long) / (view.additional_turnpoints)
+
+view = view[~view.swimstyle.str.contains('relay')].copy()
 view.sample(5)
 ```
 
@@ -1677,34 +1615,14 @@ view.sample(5)
   </thead>
   <tbody>
     <tr>
-      <th>1</th>
-      <td>50</td>
-      <td>backstroke</td>
-      <td>women</td>
-      <td>27.06</td>
-      <td>25.67</td>
-      <td>1.0</td>
-      <td>-1.390</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>100</td>
-      <td>backstroke</td>
-      <td>women</td>
-      <td>58.10</td>
-      <td>55.03</td>
-      <td>2.0</td>
-      <td>-1.535</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>50</td>
+      <th>23</th>
+      <td>200</td>
       <td>butterfly</td>
-      <td>men</td>
-      <td>22.43</td>
-      <td>21.80</td>
-      <td>1.0</td>
-      <td>-0.630</td>
+      <td>women</td>
+      <td>121.81</td>
+      <td>119.61</td>
+      <td>4.0</td>
+      <td>-0.5500</td>
     </tr>
     <tr>
       <th>10</th>
@@ -1714,17 +1632,37 @@ view.sample(5)
       <td>57.13</td>
       <td>55.61</td>
       <td>2.0</td>
-      <td>-0.760</td>
+      <td>-0.7600</td>
     </tr>
     <tr>
-      <th>30</th>
-      <td>200</td>
+      <th>40</th>
+      <td>400</td>
       <td>individual medley</td>
       <td>women</td>
-      <td>126.12</td>
-      <td>121.86</td>
+      <td>266.36</td>
+      <td>258.94</td>
+      <td>8.0</td>
+      <td>-0.9275</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>200</td>
+      <td>backstroke</td>
+      <td>men</td>
+      <td>111.92</td>
+      <td>105.63</td>
       <td>4.0</td>
-      <td>-1.065</td>
+      <td>-1.5725</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>400</td>
+      <td>freestyle</td>
+      <td>men</td>
+      <td>220.07</td>
+      <td>212.25</td>
+      <td>8.0</td>
+      <td>-0.9775</td>
     </tr>
   </tbody>
 </table>
@@ -1759,7 +1697,9 @@ It's just a bit painful to fix this in `pandas` / `matplotlib`. I like to use `g
 import plotnine as pn
 
 fig = pn.ggplot(view[view.category != "mixed"].dropna()) + \
-    pn.geom_point(pn.aes(x = "distance", y = "additional_time_per_turn", color = "swimstyle")) + \
+    pn.geom_jitter(
+        pn.aes(x = "factor(distance)", y = "additional_time_per_turn", color = "swimstyle"), 
+        width = .1, height = 0) + \
     pn.facet_wrap(facets = "category") + \
     pn.labs(
         x = "Distance", 
@@ -1769,8 +1709,12 @@ fig = pn.ggplot(view[view.category != "mixed"].dropna()) + \
 fig.draw();
 ```
 
+    /home/gijsx/anaconda3/lib/python3.6/site-packages/statsmodels/compat/pandas.py:56: FutureWarning: The pandas.core.datetools module is deprecated and will be removed in a future version. Please use the pandas.tseries module instead.
+      from pandas.core import datetools
 
-![png](/assets/images/swimming-records_41_0.png)
+
+
+![png](/assets/images/swimming-records_41_1.png)
 
 
 `plotnine` works fine. I don't like the distance on the x axis. Below I've created one with speed, which is also not ideal. But we can see how long a turn takes. 
@@ -1796,7 +1740,9 @@ We can see that a turn doesn't really take time, it's actually quicker than swim
 
 I'll consider this question answered, allthough there is much more to be said. The most important critique that I can come up with here is that it's perhaps not the best idea to answer this question using records. These are weird cases, and with more data, old records or just data from many swimming tournaments, we could produce a much more reliable estimate. 
 
-Now onto the next question; how long does a start take? This is kind of tricky because we cannot really isolate the starts from the data, since each record has exactly one start. You could say 100m equals 2 x 50m without the extra start, but the swimming speeds are also different. I think I'd need some physical model to estimate speed from this data, and then use that in the equation. 
+### 7. Give an estimate of how much time a start adds to adds to swimming 
+
+Now onto the next question; how long does a start take? This is tricky because we cannot really isolate the starts from the data, since each record has exactly one start. You could say 100m equals 2 x 50m without the extra start, but the swimming speeds are also different. I think I'd need some physical model to estimate speed from this data, and then use that in the equation. 
 
 Interesting. Hopefully I can do that some other time. For now, I'll just use the simplified idea. 
 
@@ -1841,54 +1787,54 @@ view.sample(5)
   </thead>
   <tbody>
     <tr>
-      <th>33</th>
-      <td>200</td>
+      <th>42</th>
+      <td>400</td>
       <td>individual medley</td>
       <td>women</td>
-      <td>short</td>
-      <td>113.02</td>
-      <td>121.86</td>
-      <td>8.84</td>
+      <td>long</td>
+      <td>252.24</td>
+      <td>266.36</td>
+      <td>14.12</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>100</td>
-      <td>backstroke</td>
-      <td>women</td>
-      <td>short</td>
-      <td>51.34</td>
-      <td>55.03</td>
-      <td>3.69</td>
-    </tr>
-    <tr>
-      <th>49</th>
+      <th>51</th>
       <td>800</td>
-      <td>freestyle</td>
-      <td>women</td>
-      <td>short</td>
-      <td>469.04</td>
-      <td>479.34</td>
-      <td>10.30</td>
-    </tr>
-    <tr>
-      <th>45</th>
-      <td>400</td>
-      <td>medley relay</td>
-      <td>women</td>
-      <td>short</td>
-      <td>205.96</td>
-      <td>225.20</td>
-      <td>19.24</td>
-    </tr>
-    <tr>
-      <th>41</th>
-      <td>400</td>
-      <td>individual medley</td>
+      <td>freestyle relay</td>
       <td>men</td>
       <td>short</td>
-      <td>219.26</td>
-      <td>235.50</td>
-      <td>16.24</td>
+      <td>366.60</td>
+      <td>409.04</td>
+      <td>42.44</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>200</td>
+      <td>butterfly</td>
+      <td>women</td>
+      <td>short</td>
+      <td>109.22</td>
+      <td>119.61</td>
+      <td>10.39</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>200</td>
+      <td>butterfly</td>
+      <td>men</td>
+      <td>long</td>
+      <td>99.64</td>
+      <td>111.51</td>
+      <td>11.87</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>200</td>
+      <td>butterfly</td>
+      <td>women</td>
+      <td>long</td>
+      <td>110.96</td>
+      <td>121.81</td>
+      <td>10.85</td>
     </tr>
   </tbody>
 </table>
@@ -1901,7 +1847,9 @@ view.sample(5)
 q = (view.category != "mixed") & ~view.swimstyle.str.contains("relay")
 
 fig = pn.ggplot(view[q].dropna()) + \
-    pn.geom_point(pn.aes(x = "factor(distance)", y = "difference", color = "swimstyle", shape = "course")) + \
+    pn.geom_jitter(
+        pn.aes(x = "factor(distance)", y = "difference", color = "swimstyle", shape = "course"),
+        width = .1, height = 0) + \
     pn.facet_wrap(facets = "category") + \
     pn.labs(
         x = "Distance", 
@@ -1915,4 +1863,14 @@ fig.draw();
 ![png](/assets/images/swimming-records_46_0.png)
 
 
-Well, the start doesn't save more than a couple of seconds, but it's hard to say more. This difference is for a large part fatigue of the swimmer.
+Well, the start doesn't save more than a couple of seconds, but it's hard to say more. These difference are mainly fatigue of the swimmer. 
+
+I do see some other interesting patterns. It seems the record for freestyle 400m, for men, on a long course, is not  as sharp as it could be. Also the male records on 100m butterfly are quite fast compared to the 200m records. 
+
+### 8. Conclusion
+
+The data is cleaned. We have an idea of how long a turn takes, or rather, how much time it saves. I haven't come up with an easy method to isolate the starting times. The clean data can be found on GitHub if you want to give this a try, or perhaps you want to have a look at one of these other open questions:
+
+* Why are the records posted mainly in June, July, November and December?
+* How does the time saved with a turn differ across swimmers, for example world records vs. professionals vs. amateurs?
+* How can we make a model that predicts the next record to be set?
