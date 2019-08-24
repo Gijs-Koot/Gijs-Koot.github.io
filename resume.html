@@ -1,0 +1,599 @@
+<!doctype html>
+<html>
+	<head>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimal-ui">
+	
+	<title>Gijs Koot</title>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css">
+	
+	<style type="text/css">
+	@import url(
+	https://fonts.googleapis.com/css?family=Lato:400,700
+);
+body {
+	background: #fff;
+	font-family: Lato, sans-serif;
+	margin: 0 0 80px;
+}
+a {
+	color: #2ecc71;
+}
+a:focus,
+a:hover {
+	color: #f1c40f;
+	text-decoration: none;
+}
+p {
+	line-height: 1.5;
+	margin: 0;
+}
+p + p {
+	margin-top: 10px;
+}
+h1,
+h2,
+h3,
+h4 {
+	margin-top: 0
+}
+section {
+	margin-top: 30px;
+}
+li {
+	line-height: 1.8;
+	list-style: none;
+}
+li:before {
+	content: "\f052";
+	float: left;
+	font: 13px Octicons;
+	margin-top: 6px;
+	margin-left: -20px;
+	opacity: .1;
+	position: absolute;
+}
+blockquote {
+	border-left: 5px solid #e7e9ec;
+	font-size: 14px;
+}
+em {
+	color: #95a5a6;
+	font-weight: normal;
+	font-style: normal;
+}
+h4 span:first-child {
+	color: #000;
+	font-weight: bold;
+}
+.container {
+	max-width: 750px;
+	padding: 0 30px;
+}
+.col-sm-6 {
+	margin-bottom: 10px;
+}
+.col-sm-12 h4 {
+	margin-top: 12px; 
+}
+.col-sm-12 + .col-sm-12 {
+	margin-top: 30px;
+}
+#header {
+	background: #f4f6f6;
+	padding: 50px 0;
+	margin-bottom: 30px;
+}
+#header h2 {
+	color: #95a5a6;
+	font-size: 24px;
+}
+#content h3 {
+	color: #f1c40f;
+	font-size: 26px;
+	margin-top: -4px;
+}
+#content aside {
+	text-align: right;
+	padding-right: 30px;
+}
+#profiles .network {
+	text-transform: capitalize;
+}
+#work .position,
+#volunteer .position {
+	font-weight: bold;
+	margin-bottom: 8px;
+}
+#education .area {
+	font-weight: bold;
+}
+#education .area:before {
+	content: "\f0d7";
+	font: 16px Octicons;
+	margin-right: 6px;
+}
+#education .studyType {
+	margin-left: 25px;
+}
+#awards .summary,
+#publications .summary {
+	margin-top: 8px;
+}
+#publications .website a:before {
+	content: attr(href);
+}
+
+@media (min-width: 480px) {
+	.strike-through {
+		border-top: 1px solid #f4f6f6;
+		height: 20px;
+		margin-top: 12px;
+		margin-bottom: -2px;
+		position: relative;
+	}
+	.strike-through span,
+	.strike-through a {
+		background: #fff;
+		position: absolute;
+	}
+	.strike-through span:first-child {
+		padding-right: 20px;
+		margin-top: -12px;
+	}
+	.strike-through span + span {
+		font-size: 14px;
+		margin-top: -10px;
+		padding-left: 20px;
+		right: 0;
+	}
+}
+@media (max-width: 768px) {
+	.col-sm-6:last-child {
+		margin-bottom: 0px;
+	}
+	#content aside {
+		margin-bottom: 20px;
+		padding-right: 0;
+		text-align: left;
+	}
+	#publications .website a:before {
+		content: "View publication";
+	}
+}
+@media (max-width: 480px) {
+	h1 {
+		font-size: 26px;
+	}
+	.date {
+		font-size: 14px;
+		margin-bottom: 5px;
+	}
+	.strike-through span:first-child {
+		margin-bottom: 7px;
+	}
+	.strike-through span {
+		display: block;
+	}	
+	#header {
+		margin-bottom: 10px;
+		padding: 40px 0;
+	}
+	#actions {
+		display: none;
+	}
+}
+
+	</style>
+	
+	</head>
+	<body>
+	
+	<header id="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-9 col-sm-push-3">
+					<h1>
+						Gijs Koot
+					</h1>
+					<h2>
+						Data Scientist at Urban Science - Axians
+					</h2>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div id="content" class="container">
+
+	<section id="contact" class="row">
+		<aside class="col-sm-3">
+			<h3>Contact</h3>
+		</aside>
+		<div class="col-sm-9">
+			<div class="row">
+			<div class="col-sm-6">
+				<strong>Website</strong>
+				<div class="website">
+					<a href="gijskoot.nl">gijskoot.nl</a>
+				</div>
+			</div>
+			</div>
+		</div>
+	</section>
+	<section id="about" class="row">
+		<aside class="col-sm-3">
+			<h3>About</h3>
+		</aside>
+		<div class="col-sm-9">
+			<p>I am interested in data driven analysis, with a broad interest in applications, such as quantified self, media analysis, HR analytics, business processes and smart cities. Ultimately, I want to understand and support people or organisations with statistical insights. To this end, I am always learning new theory and experimenting with new techniques. 
+
+In a job I am pragmatic, I like keeping things simple and I am good at choosing the right technology for the job at hand. In general I am analytical and will keep the bigger picture in mind. 
+
+My main interests are applied statistics, applied probability and machine learning algorithms. 
+In my spare time I like playing music, reading up on developments in technology and climbing.</p>
+		</div>
+	</section>
+	<section id="profiles" class="row">
+		<aside class="col-sm-3">
+			<h3>Profiles</h3>
+		</aside>
+		<div class="col-sm-9">
+			<div class="row">
+				<div class="col-sm-6">
+					<strong class="network">
+						LinkedIn
+					</strong>
+					<div class="username">
+						<div class="url">
+							<a href="https://www.linkedin.com/in/ACoAAADOvuoBr9DtBtXQazEsfIUU6As3COf_xSY/">ACoAAADOvuoBr9DtBtXQazEsfIUU6As3COf_xSY</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="work" class="row">
+		<aside class="col-sm-3">
+			<h3>Work</h3>
+		</aside>
+		<div class="col-sm-9">
+			<div class="row">
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Urban Science - Axians</span>
+					<span class="date">
+						2018-06-31 — 
+					</span>
+				</h4>
+				<div class="website pull-right">
+					<a href=""></a>
+				</div>
+				<div class="position">
+					Data Scientist
+				</div>
+				<div class="summary">
+					<p>Urban Science is a unit within Axians, the software company. This new team applies data science to challenges that arise particularly in urban areas. The three focus markets are Energy, Mobility and Public Services. 
+
+In this growing team I am working on
+
+* Developing and presenting new datadriven solutions in Urban Science
+* Applying statistical models and optimization algorithms
+* Projects for our customers, building cloud based datadriven applications
+* Help the team grow, in knowledge, skills and organisation
+
+Technologies: Python, PyMC3, rstan, Azure, scikit-learn, tensorflow, AWS, PostgreSQL, Docker
+
+</p>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Xomnia B.V.</span>
+					<span class="date">
+						2016-07-01 — 2018-06-01
+					</span>
+				</h4>
+				<div class="website pull-right">
+					<a href="https://www.linkedin.com/company/2919540">https://www.linkedin.com/company/2919540</a>
+				</div>
+				<div class="position">
+					Data Scientist
+				</div>
+				<div class="summary">
+					<p>Working as a consultant and as a trainer. Specializing in text-mining and applied probabilty. 
+
+The job involves 
+
+* Data analysis, answering research questions, developing and evaluating algorithms
+* Presenting results in reports or talks
+* Preparing and giving trainings or lectures to other data scientists on topics such as textmining, timeseries
+* Interviewing and mentoring prospective data scientists
+* Creating and refining project proposals, specifying the proper approach and planning for a project
+
+Technologies; Python, PyMC3, Jupyter, RStudio, rstan, Linux, Numpy, Pandas, Scipy, Scikit, gensim.</p>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>TNO</span>
+					<span class="date">
+						2012-10-01 — 2016-06-01
+					</span>
+				</h4>
+				<div class="website pull-right">
+					<a href="https://www.linkedin.com/company/3614">https://www.linkedin.com/company/3614</a>
+				</div>
+				<div class="position">
+					Scientist / Innovator
+				</div>
+				<div class="summary">
+					<p>A part of the Data Science department, the Media Mining group applies techniques from Natural Language Processing, data science and computer vision to varying domains such as cybercrime, social media, smart cities, quantified self and media personalization. My work consists of researching, creating ideas and prototyping applications. I have worked in both research projects and commercial projects, as a scientist and a developer. Project teams are generally small and flat, and I was also involved in consultancy and strategy and as a project lead. 
+
+Technologies: Python, R, AngularJS, d3.js, MongoDB, Elasticsearch, Linux, Git, Docker</p>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>The Brighthouse</span>
+					<span class="date">
+						2011-08-01 — 2012-07-01
+					</span>
+				</h4>
+				<div class="website pull-right">
+					<a href="https://www.linkedin.com/company/1919121">https://www.linkedin.com/company/1919121</a>
+				</div>
+				<div class="position">
+					Data analyst - Operations
+				</div>
+				<div class="summary">
+					<p>The Brighthouse is a young company that gathers informations from surveys. I worked on building reports and architecture.
+
+Technologies: PostgreSQL, HTML, JavaScript</p>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Visser ´t Hooft Lyceum</span>
+					<span class="date">
+						2010-01-31 — 2011-08-31
+					</span>
+				</h4>
+				<div class="website pull-right">
+					<a href="https://www.linkedin.com/company/485899">https://www.linkedin.com/company/485899</a>
+				</div>
+				<div class="position">
+					Mathematics Teacher
+				</div>
+				<div class="summary">
+					<p>Teaching mathematics at various grades, students ranging from 12 to 17 years old. Autonomous teaching, course preparation, exam preparation. Course were mostly VWO level with 15-30 students. Also taught in English in bilingual groups. </p>
+				</div>
+			</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<section id="education" class="row">
+		<aside class="col-sm-3">
+			<h3>Education</h3>
+		</aside>
+		<div class="col-sm-9">
+			<div class="row">
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Universiteit van Amsterdam / University of Amsterdam</span>
+					<span class="date">
+						2003-12-31 — 2011-12-31
+					</span>
+				</h4>
+				<div class="area">
+					Stochastics and Financial Mathematics
+				</div>
+				<div class="studyType">
+					MSc.
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Stanford Online - Lagunita</span>
+					<span class="date">
+						2016-12-31 — 2016-12-31
+					</span>
+				</h4>
+				<div class="area">
+					
+				</div>
+				<div class="studyType">
+					Statistical Learning
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Coursera</span>
+					<span class="date">
+						2014-12-31 — 2016-12-31
+					</span>
+				</h4>
+				<div class="area">
+					
+				</div>
+				<div class="studyType">
+					Probabilistic Graphical Models, Machine Learning
+				</div>
+			</div>
+			</div>
+		</div>
+	</section>
+	
+	<section id="awards" class="row">
+		<aside class="col-sm-3">
+			<h3>Awards</h3>
+		</aside>
+		<div class="col-sm-9">
+			<div class="row">
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Encouragement price on Accountability Hackathon 2016</span>
+				</h4>
+				<div class="awarder">
+					<em>by</em>
+					<strong>Open State Foundation</strong>
+				</div>
+				<div class="summary">
+					A jury awarded our prototype &#x27;Comparea&#x27;, which makes it possible to quickly make fair comparisons among Dutch municipalities, with a encouragement price. See https://accountabilityhack.nl/. 
+				</div>
+			</div>
+			</div>
+		</div>
+	</section>
+	
+	<section id="publications" class="row">
+		<aside class="col-sm-3">
+			<h3>Publications</h3>
+		</aside>
+		<div class="col-sm-9">
+			<div class="row">
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Authorship Analysis on Dark Marketplace Forums</span>
+					<span class="date">
+						2015-undefined-undefined
+					</span>
+				</h4>
+				<div class="website pull-right">
+					<a href=""></a>
+				</div>
+				<div class="publisher">
+					<em>Published by</em>
+					<strong>Proceedings of the IEEE European Intelligence &amp; Security Informatics Conference (EISIC), Manchester, UK.</strong>
+				</div>
+				<div class="summary">
+					<p></p>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Foraging Online Social Networks</span>
+					<span class="date">
+						2014-9-24
+					</span>
+				</h4>
+				<div class="website pull-right">
+					<a href=""></a>
+				</div>
+				<div class="publisher">
+					<em>Published by</em>
+					<strong>Intelligence and Security Informatics Conference (JISIC), 2014 IEEE Joint</strong>
+				</div>
+				<div class="summary">
+					<p>A concise and practical introduction is given on Online Social Networks (OSN) and their application in law enforcement, including a brief survey of related work. Subsequently, a tool is introduced that can be used to search OSN in order to generate user profiles. Both its architecture and processing pipeline are described. This tool is meant as a flexible framework that supports manual foraging (and not replaces it). As such, we aim to bridge science&#x27;s state-of-the-art and current security officer&#x27;s practice. This article ends with a brief discussion on privacy and ethical issues and future work.</p>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Privacy and User Trust in Context-Aware Systems</span>
+					<span class="date">
+						2014-6-22
+					</span>
+				</h4>
+				<div class="website pull-right">
+					<a href=""></a>
+				</div>
+				<div class="publisher">
+					<em>Published by</em>
+					<strong></strong>
+				</div>
+				<div class="summary">
+					<p>Context-aware systems (CAS) that collect personal information are a
+general trend. This leads to several privacy considerations, which we outline in
+this paper. We present as use-case the SWELL system, which collects infor-
+mation from various contextual sensors to provide support for well-being at
+work. We address privacy from two perspectives: 1) the development point of
+view, in which we describe how to apply ‘privacy by design’, and 2) a user
+study, in which we found that providing detailed information on data collection
+and privacy by design had a positive effect on trust in our CAS. We also found
+that the attitude towards using our CAS was related to personal motivation, and
+not related to perceived privacy and trust in our system. This may stress the im-
+portance of implementing privacy by design to protect the privacy of the user.</p>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Needle Custom Search</span>
+					<span class="date">
+						2014-5-8
+					</span>
+				</h4>
+				<div class="website pull-right">
+					<a href=""></a>
+				</div>
+				<div class="publisher">
+					<em>Published by</em>
+					<strong>Advances in Information Retrieval, Springer Lecture Notes on Computer Science</strong>
+				</div>
+				<div class="summary">
+					<p>Web search engines are optimized for early precision, which makes it difficult to perform recall-oriented tasks using these search engines. In this article, we present our tool Needle Custom Search. This tool exploits semantic annotations of Web search results and, thereby, increase the efficiency of recall-oriented search tasks. Semantic annotations, such as temporal annotations, named entities, and part-of-speech tags are used to rerank and cluster search result sets.</p>
+				</div>
+			</div>
+			</div>
+		</div>
+	</section>
+	
+	<section id="skills" class="row">
+		<aside class="col-sm-3">
+			<h3>Skills</h3>
+		</aside>
+		<div class="col-sm-9">
+			<div class="row">
+			<div class="col-sm-6">
+				<div class="name">
+					<h4>Statistics</h4>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="name">
+					<h4>Machine Learning</h4>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="name">
+					<h4>Python</h4>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="name">
+					<h4>Pattern Recognition</h4>
+				</div>
+			</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="languages" class="row">
+		<aside class="col-sm-3">
+			<h3>Languages</h3>
+		</aside>
+		<div class="col-sm-9">
+			<div class="row">
+			<div class="col-sm-6">
+				<div class="language">
+					<strong>en</strong>
+				</div>
+				<div class="fluency">
+					Native Speaker
+				</div>
+			</div>
+			</div>
+		</div>
+	</section>
+
+	
+
+	</div>
+	
+	</body>
+</html>

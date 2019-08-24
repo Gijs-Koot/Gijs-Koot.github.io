@@ -1,0 +1,166 @@
+{
+  "basics": {
+    "name": "Gijs Koot",
+    "label": "Data Scientist at Urban Science - Axians",
+    "picture": "",
+    "website": "gijskoot.nl",
+    "summary": "I am interested in data driven analysis, with a broad interest in applications, such as quantified self, media analysis, HR analytics, business processes and smart cities. Ultimately, I want to understand and support people or organisations with statistical insights. To this end, I am always learning new theory and experimenting with new techniques. \n\nIn a job I am pragmatic, I like keeping things simple and I am good at choosing the right technology for the job at hand. In general I am analytical and will keep the bigger picture in mind. \n\nMy main interests are applied statistics, applied probability and machine learning algorithms. \nIn my spare time I like playing music, reading up on developments in technology and climbing.",
+    "location": {
+      "address": "Utrecht City, Utrecht Province, Netherlands",
+      "postalCode": "",
+      "city": "",
+      "countryCode": "US",
+      "region": ""
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "ACoAAADOvuoBr9DtBtXQazEsfIUU6As3COf_xSY",
+        "url": "https://www.linkedin.com/in/ACoAAADOvuoBr9DtBtXQazEsfIUU6As3COf_xSY/"
+      }
+    ]
+  },
+  "work": [
+    {
+      "company": "Urban Science - Axians",
+      "highlights": [],
+      "position": "Data Scientist",
+      "startDate": "2018-06-31",
+      "summary": "Urban Science is a unit within Axians, the software company. This new team applies data science to challenges that arise particularly in urban areas. The three focus markets are Energy, Mobility and Public Services. \n\nIn this growing team I am working on\n\n* Developing and presenting new datadriven solutions in Urban Science\n* Applying statistical models and optimization algorithms\n* Projects for our customers, building cloud based datadriven applications\n* Help the team grow, in knowledge, skills and organisation\n\nTechnologies: Python, PyMC3, rstan, Azure, scikit-learn, tensorflow, AWS, PostgreSQL, Docker\n\n",
+      "website": ""
+    },
+    {
+      "company": "Xomnia B.V.",
+      "endDate": "2018-06-01",
+      "highlights": [],
+      "position": "Data Scientist",
+      "startDate": "2016-07-01",
+      "summary": "Working as a consultant and as a trainer. Specializing in text-mining and applied probabilty. \n\nThe job involves \n\n* Data analysis, answering research questions, developing and evaluating algorithms\n* Presenting results in reports or talks\n* Preparing and giving trainings or lectures to other data scientists on topics such as textmining, timeseries\n* Interviewing and mentoring prospective data scientists\n* Creating and refining project proposals, specifying the proper approach and planning for a project\n\nTechnologies; Python, PyMC3, Jupyter, RStudio, rstan, Linux, Numpy, Pandas, Scipy, Scikit, gensim.",
+      "website": "https://www.linkedin.com/company/2919540"
+    },
+    {
+      "company": "TNO",
+      "endDate": "2016-06-01",
+      "highlights": [],
+      "position": "Scientist / Innovator",
+      "startDate": "2012-10-01",
+      "summary": "A part of the Data Science department, the Media Mining group applies techniques from Natural Language Processing, data science and computer vision to varying domains such as cybercrime, social media, smart cities, quantified self and media personalization. My work consists of researching, creating ideas and prototyping applications. I have worked in both research projects and commercial projects, as a scientist and a developer. Project teams are generally small and flat, and I was also involved in consultancy and strategy and as a project lead. \n\nTechnologies: Python, R, AngularJS, d3.js, MongoDB, Elasticsearch, Linux, Git, Docker",
+      "website": "https://www.linkedin.com/company/3614"
+    },
+    {
+      "company": "The Brighthouse",
+      "endDate": "2012-07-01",
+      "highlights": [],
+      "position": "Data analyst - Operations",
+      "startDate": "2011-08-01",
+      "summary": "The Brighthouse is a young company that gathers informations from surveys. I worked on building reports and architecture.\n\nTechnologies: PostgreSQL, HTML, JavaScript",
+      "website": "https://www.linkedin.com/company/1919121"
+    },
+    {
+      "company": "Visser ´t Hooft Lyceum",
+      "endDate": "2011-08-31",
+      "highlights": [],
+      "position": "Mathematics Teacher",
+      "startDate": "2010-01-31",
+      "summary": "Teaching mathematics at various grades, students ranging from 12 to 17 years old. Autonomous teaching, course preparation, exam preparation. Course were mostly VWO level with 15-30 students. Also taught in English in bilingual groups. ",
+      "website": "https://www.linkedin.com/company/485899"
+    }
+  ],
+  "volunteer": [],
+  "education": [
+    {
+      "institution": "Universiteit van Amsterdam / University of Amsterdam",
+      "area": "Stochastics and Financial Mathematics",
+      "studyType": "MSc.",
+      "startDate": "2003-12-31",
+      "endDate": "2011-12-31",
+      "gpa": "",
+      "courses": []
+    },
+    {
+      "institution": "Stanford Online - Lagunita",
+      "area": "",
+      "studyType": "Statistical Learning",
+      "startDate": "2016-12-31",
+      "endDate": "2016-12-31",
+      "gpa": "With Distinction",
+      "courses": []
+    },
+    {
+      "institution": "Coursera",
+      "area": "",
+      "studyType": "Probabilistic Graphical Models, Machine Learning",
+      "startDate": "2014-12-31",
+      "endDate": "2016-12-31",
+      "gpa": "",
+      "courses": []
+    }
+  ],
+  "awards": [
+    {
+      "title": "Encouragement price on Accountability Hackathon 2016",
+      "awarder": "Open State Foundation",
+      "summary": "A jury awarded our prototype 'Comparea', which makes it possible to quickly make fair comparisons among Dutch municipalities, with a encouragement price. See https://accountabilityhack.nl/. "
+    }
+  ],
+  "publications": [
+    {
+      "name": "Authorship Analysis on Dark Marketplace Forums",
+      "publisher": "Proceedings of the IEEE European Intelligence & Security Informatics Conference (EISIC), Manchester, UK.",
+      "releaseDate": "2015-undefined-undefined",
+      "website": "",
+      "summary": ""
+    },
+    {
+      "name": "Foraging Online Social Networks",
+      "publisher": "Intelligence and Security Informatics Conference (JISIC), 2014 IEEE Joint",
+      "releaseDate": "2014-9-24",
+      "website": "",
+      "summary": "A concise and practical introduction is given on Online Social Networks (OSN) and their application in law enforcement, including a brief survey of related work. Subsequently, a tool is introduced that can be used to search OSN in order to generate user profiles. Both its architecture and processing pipeline are described. This tool is meant as a flexible framework that supports manual foraging (and not replaces it). As such, we aim to bridge science's state-of-the-art and current security officer's practice. This article ends with a brief discussion on privacy and ethical issues and future work."
+    },
+    {
+      "name": "Privacy and User Trust in Context-Aware Systems",
+      "publisher": "",
+      "releaseDate": "2014-6-22",
+      "website": "",
+      "summary": "Context-aware systems (CAS) that collect personal information are a\ngeneral trend. This leads to several privacy considerations, which we outline in\nthis paper. We present as use-case the SWELL system, which collects infor-\nmation from various contextual sensors to provide support for well-being at\nwork. We address privacy from two perspectives: 1) the development point of\nview, in which we describe how to apply ‘privacy by design’, and 2) a user\nstudy, in which we found that providing detailed information on data collection\nand privacy by design had a positive effect on trust in our CAS. We also found\nthat the attitude towards using our CAS was related to personal motivation, and\nnot related to perceived privacy and trust in our system. This may stress the im-\nportance of implementing privacy by design to protect the privacy of the user."
+    },
+    {
+      "name": "Needle Custom Search",
+      "publisher": "Advances in Information Retrieval, Springer Lecture Notes on Computer Science",
+      "releaseDate": "2014-5-8",
+      "website": "",
+      "summary": "Web search engines are optimized for early precision, which makes it difficult to perform recall-oriented tasks using these search engines. In this article, we present our tool Needle Custom Search. This tool exploits semantic annotations of Web search results and, thereby, increase the efficiency of recall-oriented search tasks. Semantic annotations, such as temporal annotations, named entities, and part-of-speech tags are used to rerank and cluster search result sets."
+    }
+  ],
+  "skills": [
+    {
+      "name": "Statistics",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "Machine Learning",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "Python",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "Pattern Recognition",
+      "level": "",
+      "keywords": []
+    }
+  ],
+  "languages": [
+    {
+      "language": "en",
+      "fluency": "Native Speaker"
+    }
+  ],
+  "interests": [],
+  "references": []
+}
