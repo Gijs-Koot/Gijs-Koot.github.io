@@ -58,11 +58,9 @@ This shows many files and directories, among others:
 ...
 ```
 
-Some documentation is available in the `README.md` file, which also points to https://wiki.gnome.org/Projects/Tracker/Documentation/GettingStarted. 
+Some documentation is available in the `README.md` file, which also points to https://wiki.gnome.org/Projects/Tracker/Documentation/GettingStarted. On that link I found you can view the settings with this oneliner. 
 
-## Accessing tracker settings
-
-You can view the settings with this oneliner, which I found on the previous link. 
+## 3. Accessing tracker settings
 
 ```
 $ gsettings list-recursively | grep -i org.freedesktop.Tracker | sort | uniq
@@ -90,6 +88,8 @@ $ gsettings get org.freedesktop.Tracker.Miner.Files ignored-directories
 ```
 
 So finally I added the new entries, and then reset the whole index with the following commands.
+
+## 4. TL;DR
 
 ```
 $ gsettings set org.freedesktop.Tracker.Miner.Files ignored-directories "['po', 'CVS', 'core-dumps', 'lost+found', 'data', 'venv']"
