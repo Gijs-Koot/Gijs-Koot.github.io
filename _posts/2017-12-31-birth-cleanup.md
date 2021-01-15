@@ -4,7 +4,6 @@ title:  "Birth data cleanup"
 date:   2017-12-30 10:30:00 +0200
 categories: statistics births overdispersion cleanup
 ---
-
 _Work in progress_
 
 In this post I clean up some data on daily birth numbers in the Netherlands and Belgium. When our daughter was born, it was very busy, lots of babies were born. This was told to us independently by doctors, nurses and other professionals in babies. So I started thinking about the variance in the number of babies that are born in a time period. It would be nice to have the number of babies born each day (each hour!) in Amsterdam, but I could only find data from the Netherlands, and also daily data from Belgium, which I include as well for later reference. 
@@ -220,7 +219,9 @@ plt.xlabel("Binsize equals 10");
 ```
 
 
+    
 ![png](/assets/images/birth-cleanup_4_0.png)
+    
 
 
 The distribution of dates looks insteresting with two bumps and some weird outliers. Looks like I retrieved the original data anyway. 
@@ -662,7 +663,9 @@ plt.grid();
 ```
 
 
+    
 ![png](/assets/images/birth-cleanup_18_0.png)
+    
 
 
 A yes, the extra February 29th each year.
@@ -675,7 +678,9 @@ daily_ned[daily_ned.date.dt.year == 2015].set_index('date').births.plot(
 ```
 
 
+    
 ![png](/assets/images/birth-cleanup_20_0.png)
+    
 
 
 ## Data from Belgium
@@ -797,7 +802,9 @@ plt.ylabel(f"Frequency, N = {len(daily_bel)}");
 ```
 
 
+    
 ![png](/assets/images/birth-cleanup_25_0.png)
+    
 
 
 Some overdispersion is to be expected, but this last graph is a bit weird. Perhaps for some years, only the north or the south of Belgium is included in the statistics? Or is it a big weekend effect?
@@ -812,7 +819,9 @@ plt.ylabel("Number of babies born in a 20 day-period");
 ```
 
 
+    
 ![png](/assets/images/birth-cleanup_27_0.png)
+    
 
 
 
@@ -830,7 +839,9 @@ plt.xlabel("Number of babies born per day");
 ```
 
 
+    
 ![png](/assets/images/birth-cleanup_28_0.png)
+    
 
 
 Alright, that's the weekend effect then. This effect seems to be a lot bigger than in the Netherlands. In the last graph, a density works a bit better than a histogram for comparing the days.
@@ -862,7 +873,9 @@ plt.xlabel("Density of daily births");
 ```
 
 
+    
 ![png](/assets/images/birth-cleanup_30_0.png)
+    
 
 
 Densities are always hard to interpret though, especially the height difference here. The point of this graph is to show that there is a large difference between the weekends and the weekdays, and that that effect is stronger in Belgium than in the Netherlands. But you always get more with a graph! The height difference is apparent, which means that there is less variance in the births in Belgium, especially on weekends. This is at least in part because there are less births in belgium anyway, so the variance is less as well. 

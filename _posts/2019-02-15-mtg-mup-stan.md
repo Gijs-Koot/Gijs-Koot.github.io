@@ -5,7 +5,6 @@ date:   2019-02-25 10:30:00 +0200
 published: true
 categories: statistics mtg bayesian hierarchical game python
 ---
-
 # Estimating matchup percentages in a hierarchical model with Stan
 
 Following up on my previous post, I will be estimating winning percentages between decks in the game of Magic. First, I will give some motivation and the main part is a Bayesian hierarchical model written in [Stan](mc-stan.org), using its Python interface, `pystan`. First, let's load the data and the dependencies. 
@@ -151,7 +150,9 @@ sns.heatmap(naive_perc, annot=True, fmt=".0%", cmap=plt.get_cmap("bwr_r"));
 ```
 
 
+    
 ![png](/assets/images/mtg-mup-stan_4_0.png)
+    
 
 
 This doesn't look good, and the problems that you see here are very common when you have little data. Or at least when your model has a lot of parameters relative to the data. 
@@ -359,7 +360,9 @@ sns.heatmap(mup, annot=annot, fmt="", cmap=plt.get_cmap("bwr_r"));
 
 
 
+    
 ![png](/assets/images/mtg-mup-stan_10_1.png)
+    
 
 
 You can compare the naive estimation with the above below. All estimates are pulled towards 50%. In the left image, attention is drawn towards the extreme values, but then I find myself asking all the time, on how many matchups is this data based? On the right, the extreme cases are the ones we know from the data to be extreme. The effect of the correlation between matchups is not very big, with all matchups without any data estimated to be somewhere between 48% and 52%. Here, I have shown the median estimate instead of the interval. 
@@ -372,7 +375,9 @@ sns.heatmap(mup, annot=True, fmt=".0%", cmap=plt.get_cmap("bwr_r"), ax=axes[1]);
 ```
 
 
+    
 ![png](/assets/images/mtg-mup-stan_12_0.png)
+    
 
 
 To round up this post, some plots of the other parameters in the model. First of, the covariances between the matchups. 
@@ -395,7 +400,9 @@ sns.heatmap(cov_df, annot=True, fmt=".2f", cmap=plt.get_cmap("bwr_r"));
 ```
 
 
+    
 ![png](/assets/images/mtg-mup-stan_14_0.png)
+    
 
 
 The power level are included in the model, but they are not a big factor. There is not really a best deck overall, allthough _Dredge_ and _Green Tron_ are doing well in this field. 
@@ -409,7 +416,9 @@ plt.title("Estimated power levels including uncertainty");
 ```
 
 
+    
 ![png](/assets/images/mtg-mup-stan_16_0.png)
+    
 
 
 The variances for all the decks are almost in the same order of the power levels. This is actually a bit suspicious. It may indicate some bad parametrization in the model, that should be investigated more. 
@@ -424,7 +433,9 @@ plt.title("Estimated variance in matchups including uncertainty");
 ```
 
 
+    
 ![png](/assets/images/mtg-mup-stan_18_0.png)
+    
 
 
 ## Conclusion

@@ -5,7 +5,6 @@ date:   2019-01-18 10:30:00 +0200
 published: true
 categories: statistics mtg simulation
 ---
-
 I haven't played a game of Magic in over 15 years, but every now and then I keep up with what's going on with this unique trading card game. If you don't know this game, see [wikipedia](https://en.wikipedia.org/wiki/Magic:_The_Gathering.) for an introduction. This is a rich game, with interesting mathematics and game theory to explore both in the game itself (explored by many, notably Frank Karsten, for example [here](https://www.channelfireball.com/articles/frank-analysis-how-many-colored-mana-sources-do-you-need-to-consistently-cast-your-spells/)), and in the so-called _metagame_. In this post, I simulate some fictional metagames to better understand the dynamics at play. Read on for an introductory explanation of what is meant by that. 
 
 ![black_lotus](http://assets.dacw.co/itemimages/58774.jpg)
@@ -144,7 +143,9 @@ plt.title("Randomized share of each deck as a starting point for the simulation"
 ```
 
 
+    
 ![png](/assets/images/meta-dynamics_8_0.png)
+    
 
 
 There is also a matchup table generated for this fictional format, see the table below. This is intended to be read like "Deck 0 has a 74% probability to win over deck 1". Note that conversely, deck 1 has a 26% probability of winning over deck 0. This matrix is sort of anti-symmetric, it is generated based on a [skew-symmetric](https://en.wikipedia.org/wiki/Skew-symmetric_matrix) matrix, for the mathematically enthousiastic readers. 
@@ -219,7 +220,9 @@ plt.title("Winning percentages of each deck in the current metashare");
 ```
 
 
+    
 ![png](/assets/images/meta-dynamics_12_0.png)
+    
 
 
 So in this fictional metagame, with the current distribution of archetypes, deck number 3 has the best probability of winning at slightly over 56%. The simulation is then based on the idea that players switch to this deck (in moderate amounts, governed by `step_size`). This in turn influences the winning percentages, increasing the relative attractiveness of deck 4 for example, that has the best winning probabilities against deck 3. The winning probabilities of each deck are recalculated, and the next best deck is bumped slightly, and so forth. 
@@ -238,7 +241,9 @@ axes[1].yaxis.set_major_formatter(percent_formatter)
 ```
 
 
+    
 ![png](/assets/images/meta-dynamics_14_0.png)
+    
 
 
 
@@ -262,7 +267,9 @@ axes[1].set_title("Winning percentages after 100 evolutions")
 
 
 
+    
 ![png](/assets/images/meta-dynamics_15_1.png)
+    
 
 
 As you can see, as the format evolves, deck 3 is increasing it's dominance. From the matchup table, you can see that in this case, deck number 3 has a positive matchup against all other decks, so this makes sense. Now let's have a look at the long term propects of this fictional metagame. 
@@ -275,7 +282,9 @@ plt.title("Simulated evolution of the metagame");
 ```
 
 
+    
 ![png](/assets/images/meta-dynamics_17_0.png)
+    
 
 
 As can be expected, this is not a very interesting metagame, as deck 3 just dominates every other deck. But this doesn't always happen, as the simulations below show. We simulate 200 evolution steps for 16 random metagames. As you can see, sometimes a dominating deck exists, but the dynamics can get interesting. 
@@ -306,7 +315,9 @@ fig.suptitle("Simulated evolution of 16 randomized metagames with 5 decks");
 ```
 
 
+    
 ![png](/assets/images/meta-dynamics_19_0.png)
+    
 
 
 For example, in the second plot on the first row, initially, blue seemed like a great deck, but then, as the share of each of the decks changed, the purple deck appeared even stronger. 
@@ -319,7 +330,9 @@ fig.suptitle("Simulated evolution of 16 randomized metagames with 15 decks");
 ```
 
 
+    
 ![png](/assets/images/meta-dynamics_21_0.png)
+    
 
 
 
@@ -332,7 +345,9 @@ fig.suptitle("Simulated evolution of 16 randomized metagames with 5 decks");
 ```
 
 
+    
 ![png](/assets/images/meta-dynamics_22_0.png)
+    
 
 
 As you can see in the previous plots, the simulated metagames take about 800 evolutions in this setup to stabilize. In a couple of cases, a single deck is dominating, but often, a couple of decks earn a share of the metagame. The behaviour can be quite chaotic, in particular in the last example, where this situation remains highly dynamic with some small perturbations even after setlling down. 
@@ -348,7 +363,9 @@ fig.suptitle("Simulated evolution of a single randomized metagame, \n with a dif
 ```
 
 
+    
 ![png](/assets/images/meta-dynamics_25_0.png)
+    
 
 
 Below, you can see just how chaotic the behaviour can get if we allow for many different archetypes, 25 in this case. After 2000 evolutions, a somewhat stable situation appears to be forming, for example, the yellow deck is clearly quite good, but there is no real convergence.  
@@ -363,7 +380,9 @@ fig.suptitle("Simulated evolution of a single randomized metagame, \n with a dif
 ```
 
 
+    
 ![png](/assets/images/meta-dynamics_27_0.png)
+    
 
 
 In the model above, we assumed that players switched to the best deck in a very rational way. As a first expansion of this model, I looked at the behaviour that emerges if we instead assume some randomization for choosing the next deck. The choice is based on the winning probabilities, but takes into account a `win_sensitivity` that will model players sometimes moving to a deck with lower winning percentages. This mimics a bit the exploration strategy used in Multi-Armed-Bandit problems (https://en.wikipedia.org/wiki/Multi-armed_bandit). 
@@ -395,7 +414,9 @@ fig.suptitle("Evolution of randomized metas with win_sensitivity = 0");
 ```
 
 
+    
 ![png](/assets/images/meta-dynamics_31_0.png)
+    
 
 
 If we increase the `win_sensitivity` of the players, some dominating decks appear, but not as much as we saw before. If we increase the number of different decks, no deck ever goes above a 10% metagame share.  
@@ -407,7 +428,9 @@ fig.suptitle("5000 evolutions in randomized metas with a win sensitivity of 5");
 ```
 
 
+    
 ![png](/assets/images/meta-dynamics_33_0.png)
+    
 
 
 
@@ -417,7 +440,9 @@ fig.suptitle("5000 evolutions in randomized metas with a win sensitivity of 5, \
 ```
 
 
+    
 ![png](/assets/images/meta-dynamics_34_0.png)
+    
 
 
 If we increase the `win_sensitivity` to 20, domination patterns start appearing again. Logically, it does take a lot more evolutions for these metagames to settle down. 
@@ -436,7 +461,9 @@ fig.suptitle("5000 evolutions in randomized metas with a win sensitivity of 20, 
 
 
 
+    
 ![png](/assets/images/meta-dynamics_36_1.png)
+    
 
 
 ## Conclusion

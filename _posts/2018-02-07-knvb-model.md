@@ -25,7 +25,6 @@ categories: bayesian sports soccer predictions pymc3
   src="https://vincenttam.github.io/javascripts/MathJaxLocal.js"
 >
 </script>
-
 _This post is a draft and only here temporarily, it will find a new home somewhere else!_
 
 # I think we played a strong first half
@@ -389,7 +388,9 @@ pm.traceplot(trace);
 
 
 
+    
 ![png](/assets/images/knvb-model_28_1.png)
+    
 
 
 With some data-fu we reorganize the posterior samples to be able to compare the rates per team. To keep things readable, we only plot the medians, which will disappoint the true Bayesian warriors among you. 
@@ -421,7 +422,9 @@ plt.tight_layout()
 ```
 
 
+    
 ![png](/assets/images/knvb-model_30_0.png)
+    
 
 
 By setting new values for the shared predictor variables, we can use the compiled model to get some simulated outcomes. This is now really quick and takes only a couple of seconds for 1000 simulated competitions! 
@@ -1043,7 +1046,9 @@ plt.tight_layout()
 ```
 
 
+    
 ![png](/assets/images/knvb-model_40_0.png)
+    
 
 
 The visualisation above shows for every team, for every position, the percentage of simulations that the team ended up at that position. Based on this heatmap we can see that the remainder of the season is not as exciting as you could hope; PSV has a very high chance of ending on top and at the bottom we see that the chance that Sparta will have to face relagation is more than $50\%$. This last conclusion is quite remarkable as Sparta now shares the last position with Roda, even with one extra match to play. However Sparta's inability to score goals will, according to this model, break them up in the end (_at the moment of publishing this post, Sparta is already losing the race it seems_).

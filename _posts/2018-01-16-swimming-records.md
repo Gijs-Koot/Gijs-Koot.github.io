@@ -4,7 +4,6 @@ title:  "Swimming records cleanup and analysis"
 date: 2018-1-16 10:30:00 +0200
 categories: pandas swimming sports records
 ---
-
 This is a tutorial in data cleanup using `pandas`. In one of my trainings, I asked the following questions. 
 
 
@@ -1018,7 +1017,9 @@ plt.grid(True);
 ```
 
 
+    
 ![png](/assets/images/swimming-records_27_0.png)
+    
 
 
 
@@ -1031,7 +1032,9 @@ plt.title("Number of records in swimming set in each month");
 ```
 
 
+    
 ![png](/assets/images/swimming-records_28_0.png)
+    
 
 
 Interesting that most records are broken in December. My first hypothesis would be that this has to do with a recent tournament.
@@ -1687,7 +1690,9 @@ for cat, ax in zip(["women", "men"], axes):
 ```
 
 
+    
 ![png](/assets/images/swimming-records_39_0.png)
+    
 
 
 It's just a bit painful to fix this in `pandas` / `matplotlib`. I like to use `ggplot` for this, switch to `R`, but for this post I'll give `plotnine` a try.
@@ -1714,7 +1719,9 @@ fig.draw();
 
 
 
+    
 ![png](/assets/images/swimming-records_41_1.png)
+    
 
 
 `plotnine` works fine. I don't like the distance on the x axis. Below I've created one with speed, which is also not ideal. But we can see how long a turn takes. 
@@ -1733,7 +1740,9 @@ fig.draw();
 ```
 
 
+    
 ![png](/assets/images/swimming-records_43_0.png)
+    
 
 
 We can see that a turn doesn't really take time, it's actually quicker than swimming. The difference between long and short course seems larger for backstroke. The turn in the butterfly style isn't too quick, perhaps because it's a tricky technique, or because the butterfly is already quite quick? On longer distances, the advantage of the turns disappears a bit. 
@@ -1860,7 +1869,9 @@ fig.draw();
 ```
 
 
+    
 ![png](/assets/images/swimming-records_46_0.png)
+    
 
 
 Well, the start doesn't save more than a couple of seconds, but it's hard to say more. These difference are mainly fatigue of the swimmer. 

@@ -4,7 +4,6 @@ title:  "Cleaning up tender data"
 date:   2017-05-30 22:30:00 +0200
 categories: hackathon tender dataset
 ---
-
 For the [Accountability hack](https://accountabilityhack.nl/) I am cleaning up data regarding tenders in the Netherlands. These are published on https://www.tenderned.nl/over-tenderned/datasets-aanbestedingen, and this data is in some rough shape. 
 
 You can download the data in cleaned up format from my GitHub. This post is a converted notebook, the original `.ipynb` file can also be found on GitHub. 
@@ -114,7 +113,9 @@ sns.heatmap(missing.fillna(-1), cmap = sns.diverging_palette(220, 10, as_cmap=Tr
 ```
 
 
+    
 ![png](/assets/images/tender-cleanup_8_0.png)
+    
 
 
 Lots of columns, lots of vague names. Also, the last two are in a different format, or in a kind of transitionary format. Lets look at the reading guides. 
@@ -3900,7 +3901,9 @@ nx.draw_networkx(uniqueness_graph)
 ```
 
 
+    
 ![png](/assets/images/tender-cleanup_23_0.png)
+    
 
 
 
@@ -3911,7 +3914,9 @@ nx.draw_networkx(nx.algorithms.tree.branchings.Edmonds(uniqueness_graph).find_op
 ```
 
 
+    
 ![png](/assets/images/tender-cleanup_24_0.png)
+    
 
 
 
