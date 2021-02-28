@@ -1,0 +1,23 @@
+#+OPTIONS: toc:nil
+#+BEGIN_EXPORT html
+---
+layout: post
+title: Instantiating objects with Hydra
+published: false
+---
+#+END_EXPORT
+
+* Introduction!
+
+** Paragraph
+  
+I will show some examples of instantiating objects in the Hydra configuration system
+
+#+begin_src python :results drawer code :exports both
+return 1 + 4
+#+end_src
+
+#+RESULTS:
+#+begin_src python
+None
+#+end_src
