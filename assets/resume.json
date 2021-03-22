@@ -1,10 +1,10 @@
 {
   "basics": {
     "name": "Gijs Koot",
-    "label": "Data Scientist at Urban Science - Axians",
+    "label": "Lead data Scientist at Octo",
     "picture": "",
     "website": "gijskoot.nl",
-    "summary": "I am interested in data driven analysis, with a broad interest in applications, such as quantified self, media analysis, HR analytics, business processes and smart cities. Ultimately, I want to understand and support people or organisations with statistical insights. To this end, I am always learning new theory and experimenting with new techniques. \n\nIn a job I am pragmatic, I like keeping things simple and I am good at choosing the right technology for the job at hand. In general I am analytical and will keep the bigger picture in mind. \n\nMy main interests are applied statistics, applied probability and machine learning algorithms. \nIn my spare time I like playing music, reading up on developments in technology and climbing.",
+    "summary": "I am interested in data driven analysis, with a broad interest in applications, such as quantified self, media analysis, HR analytics, and smart cities. Ultimately, I want to understand and support people or organisations with statistical insights. To this end, I am always learning new theory and experimenting with new techniques. \n\nIn a job I am pragmatic, I like keeping things simple and I am good at choosing the right technology for the job at hand. In general I am analytical and will keep the bigger picture in mind. \n\nMy main interests are applied statistics, applied probability and machine learning algorithms. \nIn my spare time I like playing music and climbing.",
     "location": {
       "address": "Utrecht City, Utrecht Province, Netherlands",
       "postalCode": "",
@@ -20,12 +20,21 @@
       }
     ]
   },
-  "work": [
+    "work": [
+{
+      "company": "Octo",
+      "highlights": [],
+      "position": "Lead data Scientist",
+      "startDate": "2020-01-01",
+      "summary": "Octo is building a platform for automated building managements driven by computer vision. In this team I am working on training models, geospatial calculations and growing the team. \n\nTechnologies: Pytorch, AWS, PostgreSQL, Docker\n\n",
+      "website": "octo.nl"
+    },
     {
       "company": "Urban Science - Axians",
       "highlights": [],
       "position": "Data Scientist",
-      "startDate": "2018-06-31",
+	"startDate": "2018-06-31",
+	"endDate": "2020-01-01",
       "summary": "Urban Science is a unit within Axians, the software company. This new team applies data science to challenges that arise particularly in urban areas. The three focus markets are Energy, Mobility and Public Services. \n\nIn this growing team I am working on\n\n* Developing and presenting new datadriven solutions in Urban Science\n* Applying statistical models and optimization algorithms\n* Projects for our customers, building cloud based datadriven applications\n* Help the team grow, in knowledge, skills and organisation\n\nTechnologies: Python, PyMC3, rstan, Azure, scikit-learn, tensorflow, AWS, PostgreSQL, Docker\n\n",
       "website": ""
     },

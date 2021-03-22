@@ -11,7 +11,9 @@ published: false
 
 ** Paragraph
   
-I will show some examples of instantiating objects in the Hydra configuration system
+I will show some examples of instantiating objects in the Hydra configuration system.
+
+*** Deep paragraph
 
 #+begin_src python :results drawer code :exports both
 return 1 + 4
@@ -21,3 +23,21 @@ return 1 + 4
 #+begin_src python
 None
 #+end_src
+
+** Julia with images?
+
+#+begin_src ess-julia
+1 + 10
+#+end_src
+
+#+RESULTS:
+: 11
+
+#+begin_src ess-julia :results output graphics file :session *julia* :file img/scatter.png :exports both
+  using Plots
+
+  scatter(rand(100), markersize = 6, c = :blue)
+#+end_src
+
+#+RESULTS:
+[[file:img/scatter.png]]
