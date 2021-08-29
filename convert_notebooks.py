@@ -5,7 +5,7 @@ from collections import defaultdict
 import re
 import nbconvert
 
-NB_DIR = "./notebooks"
+NB_DIR = "./_notebooks"
 POST_DIR = "./_posts"
 IMG_PATH = "./assets/images"
 

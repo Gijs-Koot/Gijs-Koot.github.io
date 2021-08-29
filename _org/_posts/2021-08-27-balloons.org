@@ -1,0 +1,44 @@
+#+OPTIONS: toc:nil
+
+#+BEGIN_EXPORT html
+---
+layout: post
+title: Popping balloons
+date: 2021-08-27
+published: false
+---
+#+END_EXPORT
+
+Today I played an interesting game as part of a test at work. This
+game was for testing my risk-aversity and risk-assesment skill. My
+results weren't great, the analysis was that I was too risk-averse.
+
+* Deep paragraph
+#+PROPERTY: header-args:ess-julia  :exports both :session *julia* :eval never-export
+
+#+begin_src ess-julia
+x = 5001
+#+end_src
+
+#+RESULTS:
+: 500
+
+#+begin_src ess-julia
+x + 101 - 332 + 1e8
+#+end_src
+
+#+RESULTS:
+: 100004770.0
+
+** Julia with images?
+
+Allright let's go! 
+   
+#+begin_src ess-julia :file images/scatter.png :results output graphics file
+using Plots
+
+scatter(rand(100), color="yellow")
+#+end_src
+
+#+RESULTS:
+[[file:images/scatter.png]]
