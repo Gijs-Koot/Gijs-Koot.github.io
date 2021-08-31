@@ -50,6 +50,8 @@ spend. So first, let's calculate some numbers on the best strategy if
 you have only one balloon. I will leave the analysis of the
 exploration tradeoffs for some other time.
 
+** Uniform prior
+
 If you know the exact number of pumps a balloon can take, the optimal
 strategy is easy, you just pump until one below its maximum. Let's
 call the maximum pressure the balloon can take ~M~. Now let's assume
@@ -110,10 +112,14 @@ on. Then the expected value of trying is $\frac{20 - i}{21 - i}\cdot (i +
 [[file:images/uniformpumpvcash.png]]
 
 From the graph, you can see that the break-even occurs at 10 pumps, as
-intuitively makes sense. 
+intuitively makes sense. At that point, taking the risk and cashing in
+has an equal payoff.
 
-.. To be continued ..
+** Summary
 
-- Poisson distribution
-- Markov decision process
-- Updating priors after a balloon
+An interesting game, and there is a lot more to explore, even for
+playing only a single balloon! For example, what is the expected value
+of playing the game? And can we analyze other distributions, such as
+the Poisson distribution? Thanks for reading this post, if you want to
+reach out, post an issue to the [[https://github.com/Gijs-Koot/Gijs-Koot.github.io][Github repository of this website]] or
+contact me on Twitter!
