@@ -15,7 +15,7 @@
 # in the templates via {{ site.myvariable }}.
 title: Gijs Koot
 description: > # this means to ignore newlines until "baseurl:"
-  Homepage and occasional blog. I am a Data Scientist at Urban Science in Amsterdam.
+  Homepage and occasional blog. I am a Data Scientist at Octo in The Hague
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: Gijs_Koot
