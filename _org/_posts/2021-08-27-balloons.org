@@ -63,7 +63,7 @@ pressure is not above 20, but any number below is equally likely.
   using Plots
   using Distributions
 
-  belief = Uniform(0, 20)
+  belief = Uniform(1, 21)
   bar(x -> pdf(belief, x), -10:30, labels="probability")
 #+end_src
 #+RESULTS:
@@ -75,18 +75,18 @@ your updated belief about $M$? You've discarded all the possibilities
 $M < 19$, and the other two cases are equally likely, so
 
 $$
-\mathbb{P}(M = 20) = \mathbb{P}(M = 19) = \frac{1}{2}
+\mathbb{P}(M = 21) = \mathbb{P}(M = 20) = \frac{1}{2}
 $$
 
 Now the expected value of cashing in is exactly 19, and the expected
 value of pumping is 10,
 
 \begin{align}
-\mathbb{E}(\text{pump}) = \mathbb{P}(M = 19) \cdot 0 + \mathbb{P}(M = 20) \cdot 20
+\mathbb{E}(\text{pump}) = \mathbb{P}(M = 20) \cdot 0 + \mathbb{P}(M = 21) \cdot 20
 = \frac{1}{2}\cdot 20 = 10
 \end{align}
 
-Let's do this calculation for 18. Your updated prior is that the
+Let's do this calculation for 19. Your updated prior is that the
 probability that it will break after one pump is $\frac{1}{3}$. The
 expected value of a pump is
 

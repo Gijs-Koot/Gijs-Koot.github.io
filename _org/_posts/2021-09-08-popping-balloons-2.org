@@ -1,0 +1,112 @@
+#+BEGIN_EXPORT html
+---
+layout: post
+title: Popping balloons (2)
+date: 2021-09-08
+published: true
+categories: julia probability risk
+---
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+#+END_EXPORT
+
+* Expected value of a single balloon
+#+OPTIONS: toc:nil num:nil
+#+PROPERTY: header-args:ess-julia  :exports both :session *julia* :eval never-export
+
+#+BEGIN_EXPORT html
+This is a follow up to the <a class="prev" href="{{page.previous.url}}">previous</a> post on the same game
+#+END_EXPORT
+
+Let us assume, as before, that the balloon pops at a certain level
+$M$, and we believe $M \sim \text{uniform}(1, 21)$. $M = 1$ means the
+balloon will pop immediately after we pump it once. 
+
+I figured out in the last post that the optimal strategy in this case
+is to push 10 or 11 times, then stop. But what is then the expected
+value of this game?  There are two options, either we reach 10 pushes
+without popping the balloon, or it pops before we get there. Let's
+call our cashout $B$, and the expected value is
+
+\begin{align}
+\mathbb{E}\left(B\right) &= \mathbb{P}\left(\text{reach 10
+pushes}\right) \cdot 10 \\
+&= \mathbb{P}(M > 10) \cdot 10 = 5
+\end{align}
+
+This is a simple formula, the expected value is the probability of
+reaching the goal times the goal set. Using this, we can easily
+evaluate other strategies. For example, what if our
+strategy is to play 11 times?
+
+#+begin_src ess-julia
+11 * (9 / 20)
+#+end_src
+
+#+RESULTS:
+: 4.95
+
+Plotting the expected value for all strategies, it follows a parabole,
+topping out at 10 as calculated before.
+
+#+begin_src ess-julia :file images/uniformexpected.png :results output graphics file
+  using Plots
+
+  bar(x -> (x * (20 - x) / 20), 0:20, labels="expected value", color="purple")
+#+end_src
+
+#+RESULTS:
+[[file:images/uniformexpected.png]]
+
+** A different distribution for $M$
+
+Now what if I believe $M$ to follow a Poisson distribution, and let's
+take 11 as the parameter as an example. First a plot of the distribution of $M$.
+
+#+begin_src ess-julia :file images/poissondist.png :results output graphics file
+  using Distributions
+
+  belief = Poisson(11)
+
+  bar(x -> pdf(belief, x), -10:30, labels="probability", color="brown")
+#+end_src
+
+#+RESULTS:
+[[file:images/poissondist.png]]
+
+And these are the expected values of playing on until a certain payoff
+
+#+begin_src ess-julia :file images/poissonexp.png :results output graphics file
+  belief = Poisson(11)
+
+  expected = x -> (1 - cdf(belief, x)) * x
+
+  bar(expected, 0:20, labels="expected value", color="yellow")
+#+end_src
+
+#+RESULTS:
+[[file:images/poissonexp.png]]
+
+The optimal strategy is to play 8 rounds. The interesting thing is
+that the two underlying distributions I analyzed have the same
+average, but with a Poisson distribution it is optimal to stop before
+reaching the average round at which the balloon pops. 
+
+#+begin_src ess-julia
+  mean(Uniform(1, 21)), mean(Poisson(11))
+#+end_src
+
+#+RESULTS:
+| 11.0 |
+| 11.0 |
+
+** Summary
+
+In this post I used a much more straightforward formula to find the
+optimal strategy, and was able to calculate expected payoffs for
+different strategies for two different distributions. How the shape of
+the distribution influences the optimal strategy is interesting, can
+this be generalized to other distributions? Thanks for reading this
+post, if you want to reach out, post an issue to the [[https://github.com/Gijs-Koot/Gijs-Koot.github.io][Github repository
+of this website]] or contact me on Twitter!
