@@ -1,0 +1,100 @@
+#+BEGIN_EXPORT html
+---
+layout: post
+title: Pommodoro timer in Elisp
+date: 2021-09-09
+published: true
+categories: elisp, emacs, time
+---
+#+END_EXPORT
+
+I wrote a [[https://todoist.com/productivity-methods/pomodoro-technique][pommodoro]] timer in [[https://www.emacswiki.org/emacs/LearnEmacsLisp][elisp]]. Elisp is the language of Emacs,
+the 40 year old editor that is still going! Elisp is to Emacs what
+Javascript is to Visual Studio Code if that means more to you ;).
+
+The pommodoro technique is new to me. It is a time management
+technique that consists of five simple steps. 
+
+1. Get a to-do list and a timer.
+2. Set your timer for 25 minutes, and focus on a single task until the
+   timer rings.
+3. When your session ends, mark off one pomodoro and record what you
+   completed.
+4. Then enjoy a five-minute break.
+5. After four pomodoros, take a longer, more restorative 15-30 minute
+   break.
+
+The functionality consists of two global variables and two
+functions. I use a variable for the timer itself, and a variable that
+can be used to customize the time. I use ~defvar~, which allows me to
+add documentation to a variable as well. All the code I added to
+~init.el~.
+
+#+begin_src elisp
+(defvar pommodoro-timeout "25m" "Duration of a pommodoro timer")
+(defvar pommodoro-current-timer nil "The current pommodoro timer")
+#+end_src
+
+Then I have two function that I can call when in Emacs. These I have
+tied to ~F2~ and ~F3~, so that they are really easy to reach. With
+~pommodoro-start-timer~ I am prompted for a title and then a timer is
+set with that title. With ~pommodoro-show-timer~ a message appears in
+the minibuffer that reminds me of the current timer and when it will
+be finished.
+
+#+begin_src elisp
+(defun pommodoro-start-timer ()
+  "Start a pommodoro timer which shows a notification after 25 minutes"
+  (interactive)
+  (catch 'cancel
+    (progn
+      (if (and pommodoro-current-timer (time-less-p (current-time)
+						    (timer--time pommodoro-current-timer)))
+	  (if (yes-or-no-p "There is a current pommodoro running, do you want to cancel it? ")
+	      (cancel-timer pommodoro-current-timer) (throw 'cancel t)))
+      (setq pommodoro-current-timer
+	    (run-at-time pommodoro-timeout nil #'shell-command
+			 (format "notify-send -i messagebox_info -u critical 'Pommodoro done' %s"
+				 (read-string "Task description: ")))))))
+#+end_src
+
+This function sets a timer with ~run-at-time~, based on a description
+that you have to enter (~read-string~). There is one additional
+functionality, if there is a currently running timer, I am prompted to
+be sure I want to cancel that one. The notification is sent using
+~shell-command~, using the Linux utility ~notify-send~. There is a
+package ~notifications~ in Emacs which works well, except for one
+thing, I couldn't get the notifications to show when in full-screen
+mode.
+
+This is the function for seeing how much time there is left in the
+current pommodoro which is very simple at the moment. 
+
+#+begin_src elisp
+(defun pommodoro-show-timer ()
+  (interactive)
+  (message "Pommodoro done at %s"
+	   (format-time-string "%T" (timer--time pommodoro-current-timer))))
+#+end_src
+
+And finally the keybindings are set with
+
+#+begin_src elisp
+(global-set-key (kbd "<f2>") #'pommodoro-start-timer)
+(global-set-key (kbd "<f3>") #'pommodoro-show-timer)
+#+end_src
+
+I'll be trying to stick with the technique and this home-brewn
+functionality for a while! Let's see how it works. Three improvements
+I want to add right away are
+
+- The ~pommodoro-show-timer~ function should show the name of the
+  current task as well
+- The icon should be a tomato
+- The ~pommodoro-show-timer~ function should show the relative time
+  until running out instead of the actual time ("5m to go!" instead of
+  "done at 22:04:23")
+
+Thanks for reading! If you want to
+reach out, post an issue to the [[https://github.com/Gijs-Koot/Gijs-Koot.github.io][Github repository of this website]] or
+contact me on Twitter!
