@@ -1,1 +1,1 @@
-## Yep this is work-in-progress
+# Source code for the blog at <gijskoot.nl>
