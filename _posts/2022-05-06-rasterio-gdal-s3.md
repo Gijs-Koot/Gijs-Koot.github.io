@@ -37,7 +37,7 @@ fn
 </pre>
 </div>
 
-<div id="org185d371" class="figure">
+<div id="org9973fc0" class="figure">
 <p><img src="/assets/images/heights.png" alt="heights.png" />
 </p>
 </div>
@@ -58,6 +58,42 @@ gdal_translate /tmp/sd9863_DSM_1M.asc /tmp/sd9863_DSM_1M_def_pred.tiff -co <span
 ls -lha /tmp/sd*
 </pre>
 </div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-rw-rw-r&#x2013; 1 gijs gijs 6</td>
+<td class="org-left">5M mei  6 13:37 /tmp/sd9863<sub>DSM</sub><sub>1M.asc</sub></td>
+</tr>
+
+<tr>
+<td class="org-left">-rw-rw-r&#x2013; 1 gijs gijs 1</td>
+<td class="org-left">1M mei  6 16:45 /tmp/sd9863<sub>DSM</sub><sub>1M</sub><sub>def</sub><sub>pred.tiff</sub></td>
+</tr>
+
+<tr>
+<td class="org-left">-rw-rw-r&#x2013; 1 gijs gijs 1</td>
+<td class="org-left">5M mei  6 16:45 /tmp/sd9863<sub>DSM</sub><sub>1M</sub><sub>def.tiff</sub></td>
+</tr>
+
+<tr>
+<td class="org-left">-rw-rw-r&#x2013; 1 gijs gijs 1</td>
+<td class="org-left">8M mei  6 16:45 /tmp/sd9863<sub>DSM</sub><sub>1M</sub><sub>lzw.tiff</sub></td>
+</tr>
+
+<tr>
+<td class="org-left">-rw-rw-r&#x2013; 1 gijs gijs 3</td>
+<td class="org-left">9M mei  6 16:45 /tmp/sd9863<sub>DSM</sub><sub>1M.tiff</sub></td>
+</tr>
+</tbody>
+</table>
 
 <p>
 Interestingly, all compression techniques available in <code>GDAL</code> are lossless.
@@ -80,9 +116,94 @@ cloud storage such as S3.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash">aws s3 ls s3://lockton-heights-tiles/tiles/sd980
+<pre class="src src-bash">aws s3 ls s3://heights-tiles/tiles/sd980
 </pre>
 </div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">2022-04-29</td>
+<td class="org-right">23:08:55</td>
+<td class="org-right">2903641</td>
+<td class="org-left">sd9800<sub>DSM</sub><sub>1M.tiff</sub></td>
+</tr>
+
+<tr>
+<td class="org-right">2022-04-29</td>
+<td class="org-right">23:08:54</td>
+<td class="org-right">2871755</td>
+<td class="org-left">sd9801<sub>DSM</sub><sub>1M.tiff</sub></td>
+</tr>
+
+<tr>
+<td class="org-right">2022-04-29</td>
+<td class="org-right">23:08:54</td>
+<td class="org-right">2938302</td>
+<td class="org-left">sd9802<sub>DSM</sub><sub>1M.tiff</sub></td>
+</tr>
+
+<tr>
+<td class="org-right">2022-04-29</td>
+<td class="org-right">23:08:55</td>
+<td class="org-right">2719476</td>
+<td class="org-left">sd9803<sub>DSM</sub><sub>1M.tiff</sub></td>
+</tr>
+
+<tr>
+<td class="org-right">2022-04-29</td>
+<td class="org-right">23:08:55</td>
+<td class="org-right">2643684</td>
+<td class="org-left">sd9804<sub>DSM</sub><sub>1M.tiff</sub></td>
+</tr>
+
+<tr>
+<td class="org-right">2022-04-29</td>
+<td class="org-right">23:08:55</td>
+<td class="org-right">2533681</td>
+<td class="org-left">sd9805<sub>DSM</sub><sub>1M.tiff</sub></td>
+</tr>
+
+<tr>
+<td class="org-right">2022-04-29</td>
+<td class="org-right">23:08:55</td>
+<td class="org-right">2715498</td>
+<td class="org-left">sd9806<sub>DSM</sub><sub>1M.tiff</sub></td>
+</tr>
+
+<tr>
+<td class="org-right">2022-04-29</td>
+<td class="org-right">23:08:55</td>
+<td class="org-right">2818095</td>
+<td class="org-left">sd9807<sub>DSM</sub><sub>1M.tiff</sub></td>
+</tr>
+
+<tr>
+<td class="org-right">2022-04-29</td>
+<td class="org-right">23:08:55</td>
+<td class="org-right">2755601</td>
+<td class="org-left">sd9808<sub>DSM</sub><sub>1M.tiff</sub></td>
+</tr>
+
+<tr>
+<td class="org-right">2022-04-29</td>
+<td class="org-right">23:08:56</td>
+<td class="org-right">468739</td>
+<td class="org-left">sd9809<sub>DSM</sub><sub>1M.tiff</sub></td>
+</tr>
+</tbody>
+</table>
 
 <p>
 When doing a calculation, we're typically not interested in the whole of the
@@ -102,13 +223,20 @@ benchmark this.
 <pre class="src src-python"><span style="color: #b6a0ff;">import</span> rasterio
 <span style="color: #b6a0ff;">from</span> rasterio.windows <span style="color: #b6a0ff;">import</span> Window
 
-<span style="color: #b6a0ff;">with</span> rasterio.<span style="color: #f78fe7;">open</span><span style="color: #ffffff;">(</span><span style="color: #79a8ff;">"s3://lockton-heights-tiles/tiles/sd9800_DSM_1M.tiff"</span><span style="color: #ffffff;">)</span> <span style="color: #b6a0ff;">as</span> <span style="color: #00d3d0;">raster</span>:
+<span style="color: #b6a0ff;">with</span> rasterio.<span style="color: #f78fe7;">open</span><span style="color: #ffffff;">(</span><span style="color: #79a8ff;">"s3://heights-tiles/tiles/sd9800_DSM_1M.tiff"</span><span style="color: #ffffff;">)</span> <span style="color: #b6a0ff;">as</span> <span style="color: #00d3d0;">raster</span>:
   dt = raster.read<span style="color: #ffffff;">(</span><span style="color: #00bcff;">1</span>, window=Window<span style="color: #ff62d4;">(</span><span style="color: #00bcff;">500</span>, <span style="color: #00bcff;">500</span>, <span style="color: #00bcff;">501</span>, <span style="color: #00bcff;">501</span><span style="color: #ff62d4;">)</span><span style="color: #ffffff;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
 <pre class="src src-bash"><span style="color: #b6a0ff;">time</span> python src/read_raster_window.py
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bash">real    <span style="color: #00bcff;">0m17,300s</span>
+user    <span style="color: #00bcff;">0m3,026s</span>
+sys     <span style="color: #00bcff;">0m1,038s</span>                                        
 </pre>
 </div>
 
@@ -122,6 +250,13 @@ more. We can disable this behaviour by setting an environment value.
 
 <div class="org-src-container">
 <pre class="src src-bash"><span style="color: #b6a0ff;">time</span> <span style="color: #00d3d0;">GDAL_DISABLE_READDIR_ON_OPEN</span>=YES python src/read_raster_window.py
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bash">real    <span style="color: #00bcff;">0m1,230s</span>
+user    <span style="color: #00bcff;">0m0,400s</span>
+sys     <span style="color: #00bcff;">0m0,948s</span>
 </pre>
 </div>
 </div>

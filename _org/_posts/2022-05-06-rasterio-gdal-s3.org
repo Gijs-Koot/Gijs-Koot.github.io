@@ -1,6 +1,6 @@
 #+OPTIONS: toc:nil num:nil broken-links:t
 #+PROPERTY: header-args:python :exports both :session *python* :eval never-export
-#+PROPERTY: header-args:bash :results src code :eval never-export
+#+PROPERTY: header-args:bash :results src code :eval never-export :exports both
 #+BEGIN_EXPORT html
 ---
 layout: post
