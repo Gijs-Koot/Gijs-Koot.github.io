@@ -11,27 +11,6 @@ categories: julia statistics covid
 <div id="outline-container-org3c385eb" class="outline-2">
 <h2 id="org3c385eb">Adding log odds to combine statistics</h2>
 <div class="outline-text-2" id="text-org3c385eb">
-</div>
-
-<div id="outline-container-orgccf76f3" class="outline-3">
-<h3 id="orgccf76f3">Edit</h3>
-<div class="outline-text-3" id="text-orgccf76f3">
-<p>
-<span class="underline">Update: see my next post for a much more straightforward calculation</span>
-</p>
-
-<a href="{{page.next.url}}">Corrected post on same calculation</a>
-
-<p>
-There is a small difference in the final answer that I cannot explain
-yet. 
-</p>
-</div>
-</div>
-
-<div id="outline-container-orgb55f2d3" class="outline-3">
-<h3 id="orgb55f2d3">Original post, please spot the mistake and let me know</h3>
-<div class="outline-text-3" id="text-orgb55f2d3">
 <p>
 This is an answer to a <a href="https://stats.stackexchange.com/questions/546774/how-to-combine-state-level-covid-19-vaccination-rates-with-national-demographic">question</a> on Stats Overflow. 
 </p>
@@ -55,7 +34,6 @@ logistic regression model. As you will see, what happens is that we
 cannot add and subtract percentages directly, but we can add and
 subtract logodds.
 </p>
-</div>
 </div>
 
 <div id="outline-container-org6a3af3a" class="outline-3">

@@ -77,7 +77,7 @@ our scale, things still add up. I live in the Netherlands which has an area of
 cloud storage such as S3.
 
 #+begin_src bash
-aws s3 ls s3://lockton-heights-tiles/tiles/sd980
+aws s3 ls s3://heights-tiles/tiles/sd980
 #+end_src
 
 #+RESULTS:
@@ -106,7 +106,7 @@ benchmark this.
 import rasterio
 from rasterio.windows import Window
 
-with rasterio.open("s3://lockton-heights-tiles/tiles/sd9800_DSM_1M.tiff") as raster:
+with rasterio.open("s3://heights-tiles/tiles/sd9800_DSM_1M.tiff") as raster:
   dt = raster.read(1, window=Window(500, 500, 501, 501))
 #+end_src
 
