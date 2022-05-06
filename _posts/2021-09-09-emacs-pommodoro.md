@@ -37,8 +37,8 @@ add documentation to a variable as well. All the code I added to
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp">(<span style="color: #b6a0ff;">defvar</span> <span style="color: #00d3d0;">pommodoro-timeout</span> <span style="color: #79a8ff;">"25m"</span> <span style="color: #b0d6f5;">"Duration of a pommodoro timer"</span>)
-(<span style="color: #b6a0ff;">defvar</span> <span style="color: #00d3d0;">pommodoro-current-timer</span> nil <span style="color: #b0d6f5;">"The current pommodoro timer"</span>)
+<pre class="src src-elisp"><span style="color: #ffffff;">(</span><span style="color: #b6a0ff;">defvar</span> <span style="color: #00d3d0;">pommodoro-timeout</span> <span style="color: #79a8ff;">"25m"</span> <span style="color: #b0d6f5;">"Duration of a pommodoro timer"</span><span style="color: #ffffff;">)</span>
+<span style="color: #ffffff;">(</span><span style="color: #b6a0ff;">defvar</span> <span style="color: #00d3d0;">pommodoro-current-timer</span> nil <span style="color: #b0d6f5;">"The current pommodoro timer"</span><span style="color: #ffffff;">)</span>
 </pre>
 </div>
 
@@ -52,19 +52,19 @@ be finished.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp">(<span style="color: #b6a0ff;">defun</span> <span style="color: #feacd0;">pommodoro-start-timer</span> ()
+<pre class="src src-elisp"><span style="color: #ffffff;">(</span><span style="color: #b6a0ff;">defun</span> <span style="color: #feacd0;">pommodoro-start-timer</span> <span style="color: #ff62d4;">()</span>
   <span style="color: #b0d6f5;">"Start a pommodoro timer which shows a notification after 25 minutes"</span>
-  (<span style="color: #b6a0ff;">interactive</span>)
-  (<span style="color: #b6a0ff;">catch</span> '<span style="color: #00bcff;">cancel</span>
-    (<span style="color: #b6a0ff;">progn</span>
-      (<span style="color: #b6a0ff;">if</span> (<span style="color: #b6a0ff;">and</span> pommodoro-current-timer (time-less-p (current-time)
-                                                    (timer--time pommodoro-current-timer)))
-          (<span style="color: #b6a0ff;">if</span> (yes-or-no-p <span style="color: #79a8ff;">"There is a current pommodoro running, do you want to cancel it? "</span>)
-              (cancel-timer pommodoro-current-timer) (<span style="color: #b6a0ff;">throw</span> '<span style="color: #00bcff;">cancel</span> t)))
-      (<span style="color: #b6a0ff;">setq</span> pommodoro-current-timer
-            (run-at-time pommodoro-timeout nil #'shell-command
-                         (format <span style="color: #79a8ff;">"notify-send -i messagebox_info -u critical 'Pommodoro done' %s"</span>
-                                 (read-string <span style="color: #79a8ff;">"Task description: "</span>)))))))
+  <span style="color: #ff62d4;">(</span><span style="color: #b6a0ff;">interactive</span><span style="color: #ff62d4;">)</span>
+  <span style="color: #ff62d4;">(</span><span style="color: #b6a0ff;">catch</span> '<span style="color: #00bcff;">cancel</span>
+    <span style="color: #3fdfd0;">(</span><span style="color: #b6a0ff;">progn</span>
+      <span style="color: #fba849;">(</span><span style="color: #b6a0ff;">if</span> <span style="color: #9f80ff;">(</span><span style="color: #b6a0ff;">and</span> pommodoro-current-timer <span style="color: #4fe42f;">(</span>time-less-p <span style="color: #fe6060;">(</span>current-time<span style="color: #fe6060;">)</span>
+                <span style="color: #fe6060;">(</span>timer--time pommodoro-current-timer<span style="color: #fe6060;">)</span><span style="color: #4fe42f;">)</span><span style="color: #9f80ff;">)</span>
+    <span style="color: #9f80ff;">(</span><span style="color: #b6a0ff;">if</span> <span style="color: #4fe42f;">(</span>yes-or-no-p <span style="color: #79a8ff;">"There is a current pommodoro running, do you want to cancel it? "</span><span style="color: #4fe42f;">)</span>
+        <span style="color: #4fe42f;">(</span>cancel-timer pommodoro-current-timer<span style="color: #4fe42f;">)</span> <span style="color: #4fe42f;">(</span><span style="color: #b6a0ff;">throw</span> '<span style="color: #00bcff;">cancel</span> t<span style="color: #4fe42f;">)</span><span style="color: #9f80ff;">)</span><span style="color: #fba849;">)</span>
+      <span style="color: #fba849;">(</span><span style="color: #b6a0ff;">setq</span> pommodoro-current-timer
+      <span style="color: #9f80ff;">(</span>run-at-time pommodoro-timeout nil #'shell-command
+       <span style="color: #4fe42f;">(</span>format <span style="color: #79a8ff;">"notify-send -i messagebox_info -u critical 'Pommodoro done' %s"</span>
+         <span style="color: #fe6060;">(</span>read-string <span style="color: #79a8ff;">"Task description: "</span><span style="color: #fe6060;">)</span><span style="color: #4fe42f;">)</span><span style="color: #9f80ff;">)</span><span style="color: #fba849;">)</span><span style="color: #3fdfd0;">)</span><span style="color: #ff62d4;">)</span><span style="color: #ffffff;">)</span>
 </pre>
 </div>
 
@@ -85,10 +85,10 @@ current pommodoro which is very simple at the moment.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp">(<span style="color: #b6a0ff;">defun</span> <span style="color: #feacd0;">pommodoro-show-timer</span> ()
-  (<span style="color: #b6a0ff;">interactive</span>)
-  (message <span style="color: #79a8ff;">"Pommodoro done at %s"</span>
-           (format-time-string <span style="color: #79a8ff;">"%T"</span> (timer--time pommodoro-current-timer))))
+<pre class="src src-elisp"><span style="color: #ffffff;">(</span><span style="color: #b6a0ff;">defun</span> <span style="color: #feacd0;">pommodoro-show-timer</span> <span style="color: #ff62d4;">()</span>
+  <span style="color: #ff62d4;">(</span><span style="color: #b6a0ff;">interactive</span><span style="color: #ff62d4;">)</span>
+  <span style="color: #ff62d4;">(</span>message <span style="color: #79a8ff;">"Pommodoro done at %s"</span>
+     <span style="color: #3fdfd0;">(</span>format-time-string <span style="color: #79a8ff;">"%T"</span> <span style="color: #fba849;">(</span>timer--time pommodoro-current-timer<span style="color: #fba849;">)</span><span style="color: #3fdfd0;">)</span><span style="color: #ff62d4;">)</span><span style="color: #ffffff;">)</span>
 </pre>
 </div>
 
@@ -97,8 +97,8 @@ And finally the keybindings are set with
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp">(global-set-key (kbd <span style="color: #79a8ff;">"&lt;f2&gt;"</span>) #'pommodoro-start-timer)
-(global-set-key (kbd <span style="color: #79a8ff;">"&lt;f3&gt;"</span>) #'pommodoro-show-timer)
+<pre class="src src-elisp"><span style="color: #ffffff;">(</span>global-set-key <span style="color: #ff62d4;">(</span>kbd <span style="color: #79a8ff;">"&lt;f2&gt;"</span><span style="color: #ff62d4;">)</span> #'pommodoro-start-timer<span style="color: #ffffff;">)</span>
+<span style="color: #ffffff;">(</span>global-set-key <span style="color: #ff62d4;">(</span>kbd <span style="color: #79a8ff;">"&lt;f3&gt;"</span><span style="color: #ff62d4;">)</span> #'pommodoro-show-timer<span style="color: #ffffff;">)</span>
 </pre>
 </div>
 

@@ -8,9 +8,30 @@ categories: julia statistics covid
 
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-<div id="outline-container-org6eaf792" class="outline-2">
-<h2 id="org6eaf792">Adding log odds to combine statistics</h2>
-<div class="outline-text-2" id="text-org6eaf792">
+<div id="outline-container-org3c385eb" class="outline-2">
+<h2 id="org3c385eb">Adding log odds to combine statistics</h2>
+<div class="outline-text-2" id="text-org3c385eb">
+</div>
+
+<div id="outline-container-orgccf76f3" class="outline-3">
+<h3 id="orgccf76f3">Edit</h3>
+<div class="outline-text-3" id="text-orgccf76f3">
+<p>
+<span class="underline">Update: see my next post for a much more straightforward calculation</span>
+</p>
+
+<a href="{{page.next.url}}">Corrected post on same calculation</a>
+
+<p>
+There is a small difference in the final answer that I cannot explain
+yet. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb55f2d3" class="outline-3">
+<h3 id="orgb55f2d3">Original post, please spot the mistake and let me know</h3>
+<div class="outline-text-3" id="text-orgb55f2d3">
 <p>
 This is an answer to a <a href="https://stats.stackexchange.com/questions/546774/how-to-combine-state-level-covid-19-vaccination-rates-with-national-demographic">question</a> on Stats Overflow. 
 </p>
@@ -35,10 +56,11 @@ cannot add and subtract percentages directly, but we can add and
 subtract logodds.
 </p>
 </div>
+</div>
 
-<div id="outline-container-org021e0d5" class="outline-3">
-<h3 id="org021e0d5">Logistic regression model</h3>
-<div class="outline-text-3" id="text-org021e0d5">
+<div id="outline-container-org6a3af3a" class="outline-3">
+<h3 id="org6a3af3a">Logistic regression model</h3>
+<div class="outline-text-3" id="text-org6a3af3a">
 <p>
 To begin, we need two percentages from the <a href="https://covid.cdc.gov/covid-data-tracker/#vaccinations_vacc-total-admin-rate-total">official statistics</a>, the
 nationwide (full) vaccination grade, and the percentage in Delaware.
@@ -63,13 +85,13 @@ Python or R.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ess-julia"><span style="color: #81A1C1;">function</span> <span style="font-weight: bold;">logit</span>(p)
+<pre class="src src-ess-julia">function logit(p)
      log(p / (1 - p))
-<span style="color: #81A1C1;">end</span>
+end
 
-<span style="color: #81A1C1;">function</span> <span style="font-weight: bold;">logistic</span>(x)
+function logistic(x)
     exp(x) / (exp(x) + 1)
-<span style="color: #81A1C1;">end</span>
+end
 </pre>
 </div>
 
@@ -172,9 +194,9 @@ and add that to our model as well.
 </div>
 </div>
 
-<div id="outline-container-orgbf6c1aa" class="outline-3">
-<h3 id="orgbf6c1aa">Calculating the age coefficient for 40-49</h3>
-<div class="outline-text-3" id="text-orgbf6c1aa">
+<div id="outline-container-orgd901c70" class="outline-3">
+<h3 id="orgd901c70">Calculating the age coefficient for 40-49</h3>
+<div class="outline-text-3" id="text-orgd901c70">
 <p>
 The official <a href="https://covid.cdc.gov/covid-data-tracker/#vaccination-demographic">statistics</a> aren't yet in the form we need them. On the
 graphs, you can find that 14.1% of those vaccinated are in the age
@@ -186,8 +208,8 @@ know that 14.1% of all vaccinated are in the age group 40-49.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ess-julia">vac_n = 186387228           <span style="color: #677691;"># </span><span style="color: #677691;">total number of vaccinated</span>
-age_vacc_n = .142 * vac_n   <span style="color: #677691;"># </span><span style="color: #677691;">in the age group 40-49</span>
+<pre class="src src-ess-julia">vac_n = 186387228           # total number of vaccinated
+age_vacc_n = .142 * vac_n   # in the age group 40-49
 </pre>
 </div>
 

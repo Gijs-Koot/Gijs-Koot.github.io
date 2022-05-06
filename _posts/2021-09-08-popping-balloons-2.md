@@ -8,9 +8,9 @@ categories: julia probability risk
 
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-<div id="outline-container-org77d1cb6" class="outline-2">
-<h2 id="org77d1cb6">Expected value of a single balloon</h2>
-<div class="outline-text-2" id="text-org77d1cb6">
+<div id="outline-container-org9a5ccb7" class="outline-2">
+<h2 id="org9a5ccb7">Expected value of a single balloon</h2>
+<div class="outline-text-2" id="text-org9a5ccb7">
 This is a follow up to the <a class="prev" href="{{page.previous.url}}">previous</a> post on the same game
 
 <p>
@@ -56,38 +56,38 @@ topping out at 10 as calculated before.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ess-julia"><span style="color: #b6a0ff;">using</span> Plots
+<pre class="src src-ess-julia">using Plots
 
-bar(x -&gt; (x * (20 - x) / 20), 0:20, labels=<span style="color: #79a8ff;">"expected value"</span>, color=<span style="color: #79a8ff;">"purple"</span>)
+bar(x -&gt; (x * (20 - x) / 20), 0:20, labels="expected value", color="purple")
 </pre>
 </div>
 
 
-<div id="org49470da" class="figure">
+<div id="org79c39f2" class="figure">
 <p><img src="/assets/images/uniformexpected.png" alt="uniformexpected.png" />
 </p>
 </div>
 </div>
 
-<div id="outline-container-org011668b" class="outline-3">
-<h3 id="org011668b">A different distribution for \(M\)</h3>
-<div class="outline-text-3" id="text-org011668b">
+<div id="outline-container-orged79f8c" class="outline-3">
+<h3 id="orged79f8c">A different distribution for \(M\)</h3>
+<div class="outline-text-3" id="text-orged79f8c">
 <p>
 Now what if I believe \(M\) to follow a Poisson distribution, and let's
 take 11 as the parameter as an example. First a plot of the distribution of \(M\).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ess-julia"><span style="color: #b6a0ff;">using</span> Distributions
+<pre class="src src-ess-julia">using Distributions
 
 belief = Poisson(11)
 
-bar(x -&gt; pdf(belief, x), -10:30, labels=<span style="color: #79a8ff;">"probability"</span>, color=<span style="color: #79a8ff;">"brown"</span>)
+bar(x -&gt; pdf(belief, x), -10:30, labels="probability", color="brown")
 </pre>
 </div>
 
 
-<div id="orgac698f4" class="figure">
+<div id="org73d76b0" class="figure">
 <p><img src="/assets/images/poissondist.png" alt="poissondist.png" />
 </p>
 </div>
@@ -101,12 +101,12 @@ And these are the expected values of playing on until a certain payoff
 
 expected = x -&gt; (1 - cdf(belief, x)) * x
 
-bar(expected, 0:20, labels=<span style="color: #79a8ff;">"expected value"</span>, color=<span style="color: #79a8ff;">"yellow"</span>)
+bar(expected, 0:20, labels="expected value", color="yellow")
 </pre>
 </div>
 
 
-<div id="orgcbce420" class="figure">
+<div id="orga4277e9" class="figure">
 <p><img src="/assets/images/poissonexp.png" alt="poissonexp.png" />
 </p>
 </div>
@@ -142,9 +142,9 @@ reaching the average round at which the balloon pops.
 </div>
 </div>
 
-<div id="outline-container-org5de8d4c" class="outline-3">
-<h3 id="org5de8d4c">Summary</h3>
-<div class="outline-text-3" id="text-org5de8d4c">
+<div id="outline-container-orgaaa7fde" class="outline-3">
+<h3 id="orgaaa7fde">Summary</h3>
+<div class="outline-text-3" id="text-orgaaa7fde">
 <p>
 In this post I used a much more straightforward formula to find the
 optimal strategy, and was able to calculate expected payoffs for

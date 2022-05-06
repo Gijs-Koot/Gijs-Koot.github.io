@@ -1,0 +1,140 @@
+#+OPTIONS: toc:nil num:nil broken-links:t
+#+PROPERTY: header-args:python :exports both :session *python* :eval never-export
+#+PROPERTY: header-args:bash :results src code :eval never-export
+#+BEGIN_EXPORT html
+---
+layout: post
+title: Reading large tiles from S3 directly with `rasterio`
+date: 2022-05-06
+published: true
+categories: AWS geo
+---
+
+#+END_EXPORT
+
+At SpotR, we make heavy use of rasterdata containing gridded height measurements.
+
+When working in ~python~, the [[https://rasterio.readthedocs.io/en/latest/index.html][~rasterio~]] package is useful. This package is
+essentially a more pythonic binding to the GDAl library, as explained in their [[https://rasterio.readthedocs.io/en/latest/intro.html][
+introduction]].
+
+#+begin_src python :results file
+import rasterio
+import matplotlib.pyplot as plt
+import numpy as np
+
+with rasterio.open("/tmp/sd9863_DSM_1M.tiff") as dataset:
+   heights = dataset.read(1)
+
+fn = "images/heights.png"
+
+# replace nodata values with nan
+heights[np.where(heights==dataset.nodata)] = np.nan
+
+plt.imshow(heights)
+plt.title("Example of a 1km x 1km raster")
+plt.tight_layout()
+plt.savefig(fn)
+fn
+#+end_src
+#+RESULTS:
+[[file:images/heights.png]]
+
+Rastertiles, typically GeoTiff files, can become quite large in terms of memory
+size. This grid above takes up around ~4Mb as an uncompressed GeoTiff file, down
+from 6.5Mb as a ~.asc~ file, which is a simple text-based format. There are a
+couple of interesting compression techniques like [[https://en.wikipedia.org/wiki/Deflate][DEFLATE]] and [[https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch][LZW]] that can bring
+the size of the data down further.
+
+#+begin_src bash
+gdal_translate /tmp/sd9863_DSM_1M.asc /tmp/sd9863_DSM_1M.tiff > /dev/null
+gdal_translate /tmp/sd9863_DSM_1M.asc /tmp/sd9863_DSM_1M_lzw.tiff -co COMPRESS=LZW > /dev/null
+gdal_translate /tmp/sd9863_DSM_1M.asc /tmp/sd9863_DSM_1M_def.tiff -co COMPRESS=DEFLATE > /dev/null
+gdal_translate /tmp/sd9863_DSM_1M.asc /tmp/sd9863_DSM_1M_def_pred.tiff -co COMPRESS=DEFLATE -co PREDICTOR=2 > /dev/null
+ls -lha /tmp/sd*
+#+end_src
+
+#+RESULTS:
+| -rw-rw-r-- 1 gijs gijs 6 | 5M mei  6 13:37 /tmp/sd9863_DSM_1M.asc           |
+| -rw-rw-r-- 1 gijs gijs 1 | 1M mei  6 16:45 /tmp/sd9863_DSM_1M_def_pred.tiff |
+| -rw-rw-r-- 1 gijs gijs 1 | 5M mei  6 16:45 /tmp/sd9863_DSM_1M_def.tiff      |
+| -rw-rw-r-- 1 gijs gijs 1 | 8M mei  6 16:45 /tmp/sd9863_DSM_1M_lzw.tiff      |
+| -rw-rw-r-- 1 gijs gijs 3 | 9M mei  6 16:45 /tmp/sd9863_DSM_1M.tiff          |
+
+Interestingly, all compression techniques available in ~GDAL~ are lossless.
+There are JPEG based compression systems, but they can only be applied to 8bit
+unsigned data, in other words, images, and these height measurements which are
+organized as floating point numbers cannot be stored using JPEG compression. I
+can definitely think of some usecases where some distortion of these
+measurements is fine, as long as it's bounded somehow, but I haven't come across
+examples of a lossy compression for rasters of floating points.
+
+** Partial reads
+
+Compression can save us almost an order of magnitude, but to store this data at
+our scale, things still add up. I live in the Netherlands which has an area of
+41,543 km^2. That's 40k+ tiles at 1Mb+ each, 50Gb in total. Perfect to save on
+cloud storage such as S3.
+
+#+begin_src bash
+aws s3 ls s3://lockton-heights-tiles/tiles/sd980
+#+end_src
+
+#+RESULTS:
+| 2022-04-29 | 23:08:55 | 2903641 | sd9800_DSM_1M.tiff |
+| 2022-04-29 | 23:08:54 | 2871755 | sd9801_DSM_1M.tiff |
+| 2022-04-29 | 23:08:54 | 2938302 | sd9802_DSM_1M.tiff |
+| 2022-04-29 | 23:08:55 | 2719476 | sd9803_DSM_1M.tiff |
+| 2022-04-29 | 23:08:55 | 2643684 | sd9804_DSM_1M.tiff |
+| 2022-04-29 | 23:08:55 | 2533681 | sd9805_DSM_1M.tiff |
+| 2022-04-29 | 23:08:55 | 2715498 | sd9806_DSM_1M.tiff |
+| 2022-04-29 | 23:08:55 | 2818095 | sd9807_DSM_1M.tiff |
+| 2022-04-29 | 23:08:55 | 2755601 | sd9808_DSM_1M.tiff |
+| 2022-04-29 | 23:08:56 |  468739 | sd9809_DSM_1M.tiff |
+
+When doing a calculation, we're typically not interested in the whole of the
+tile. For example, we only want to know the height of a single pixel in the
+raster file. It is possible to avoid downloading the whole file, this operation
+can be done using a partial read. This is possible because S3 allows
+random-access reads, and GDAL supports reading over a network with
+[[https://gdal.org/user/virtual_file_systems.html][virtual file systems]].
+
+Depending on how large your tiles are, this can make a big difference. Let's
+benchmark this.
+
+#+begin_src python :tangle ./src/read_raster_window.py :eval never
+import rasterio
+from rasterio.windows import Window
+
+with rasterio.open("s3://lockton-heights-tiles/tiles/sd9800_DSM_1M.tiff") as raster:
+  dt = raster.read(1, window=Window(500, 500, 501, 501))
+#+end_src
+
+#+begin_src bash
+time python src/read_raster_window.py
+#+end_src
+
+#+RESULTS:
+#+begin_src bash
+real    0m17,300s
+user    0m3,026s
+sys     0m1,038s                                        
+#+end_src
+
+Wait a minute .. 17 seconds is still a long time. It turns out that ~GDAL~ will
+scan the whole folder for other files before opening a file. This is interesting
+behaviour that makes sense when geodata files are often accompanied by other
+files that include information about transformation, possibly some indexes and
+more. We can disable this behaviour by setting an environment value. 
+
+#+begin_src bash
+time GDAL_DISABLE_READDIR_ON_OPEN=YES python src/read_raster_window.py
+#+end_src
+
+#+RESULTS:
+#+begin_src bash
+real    0m1,230s
+user    0m0,400s
+sys     0m0,948s
+#+end_src
+

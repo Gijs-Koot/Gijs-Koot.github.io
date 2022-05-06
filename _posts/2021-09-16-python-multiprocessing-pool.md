@@ -6,9 +6,9 @@ published: true
 categories: python multiprocessing
 ---
 
-<div id="outline-container-orga53d4c0" class="outline-2">
-<h2 id="orga53d4c0">When to use <code>ProcessPoolExecutor</code></h2>
-<div class="outline-text-2" id="text-orga53d4c0">
+<div id="outline-container-org0804d4f" class="outline-2">
+<h2 id="org0804d4f">When to use <code>ProcessPoolExecutor</code></h2>
+<div class="outline-text-2" id="text-org0804d4f">
 <p>
 Using the <code>ProcessPoolExecutor</code> in <code>concurrent.futures</code> is a quick way
 to divide your workload over multiple processes. This is useful if you
@@ -68,9 +68,9 @@ learn how to use multiprocessing easily in python.
 </p>
 </div>
 
-<div id="outline-container-org6305ef6" class="outline-3">
-<h3 id="org6305ef6">Basic multiprocessing with <code>os.fork</code></h3>
-<div class="outline-text-3" id="text-org6305ef6">
+<div id="outline-container-orgecc74a1" class="outline-3">
+<h3 id="orgecc74a1">Basic multiprocessing with <code>os.fork</code></h3>
+<div class="outline-text-3" id="text-orgecc74a1">
 <p>
 First, to get started, have a look at this demonstration of
 <code>os.fork</code>. In practical terms, this duplicates the running
@@ -86,9 +86,9 @@ except for their <code>pid</code>, their process id.
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #b6a0ff;">import</span> os
 
-os.fork()
+os.fork<span style="color: #ffffff;">()</span>
 
-<span style="color: #b6a0ff;">print</span>(os.getpid())
+<span style="color: #f78fe7;">print</span><span style="color: #ffffff;">(</span>os.getpid<span style="color: #ff62d4;">()</span><span style="color: #ffffff;">)</span>
 </pre>
 </div>
 
@@ -98,8 +98,8 @@ os.fork()
 </div>
 
 <div class="org-src-container">
-<pre class="src src-python">22896
-22897
+<pre class="src src-python"><span style="color: #00bcff;">18359</span>
+<span style="color: #00bcff;">18360</span>
 </pre>
 </div>
 
@@ -118,26 +118,26 @@ on this primitive system.
 <span style="color: #b6a0ff;">import</span> time
 <span style="color: #b6a0ff;">import</span> sys
 
-<span style="color: #00d3d0;">tasks</span> = <span style="color: #f78fe7;">list</span>(<span style="color: #f78fe7;">range</span>(10))
+<span style="color: #00d3d0;">tasks</span> = <span style="color: #f78fe7;">list</span><span style="color: #ffffff;">(</span><span style="color: #f78fe7;">range</span><span style="color: #ff62d4;">(</span><span style="color: #00bcff;">10</span><span style="color: #ff62d4;">)</span><span style="color: #ffffff;">)</span>
 
-<span style="color: #00d3d0;">part_a</span> = tasks[:5]
-<span style="color: #00d3d0;">part_b</span> = tasks[5:]
+<span style="color: #00d3d0;">part_a</span> = tasks<span style="color: #ffffff;">[</span>:<span style="color: #00bcff;">5</span><span style="color: #ffffff;">]</span>
+<span style="color: #00d3d0;">part_b</span> = tasks<span style="color: #ffffff;">[</span><span style="color: #00bcff;">5</span>:<span style="color: #ffffff;">]</span>
 
-<span style="color: #00d3d0;">res</span> = os.fork()
+<span style="color: #00d3d0;">res</span> = os.fork<span style="color: #ffffff;">()</span>
 
-<span style="color: #b6a0ff;">if</span> res == 0:
-<span style="background-color: #151823;"> </span>   <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">main process</span>
-<span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">for</span> task <span style="color: #b6a0ff;">in</span> part_a:
-<span style="background-color: #151823;"> </span>   <span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">print</span>(f<span style="color: #79a8ff;">"I am process {os.getpid()} working on task {task}"</span>)
-<span style="background-color: #151823;"> </span>   <span style="background-color: #151823;"> </span>   time.sleep(.2)
-<span style="background-color: #151823;"> </span>   <span style="background-color: #151823;"> </span>   sys.stdout.flush()
+<span style="color: #b6a0ff;">if</span> res == <span style="color: #00bcff;">0</span>:
+    <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">main process</span>
+    <span style="color: #b6a0ff;">for</span> task <span style="color: #b6a0ff;">in</span> part_a:
+        <span style="color: #f78fe7;">print</span><span style="color: #ffffff;">(</span>f<span style="color: #79a8ff;">"I am process </span>{os.getpid()}<span style="color: #79a8ff;"> working on task </span>{task}<span style="color: #79a8ff;">"</span><span style="color: #ffffff;">)</span>
+        time.sleep<span style="color: #ffffff;">(</span>.<span style="color: #00bcff;">2</span><span style="color: #ffffff;">)</span>
+        sys.stdout.flush<span style="color: #ffffff;">()</span>
 <span style="color: #b6a0ff;">else</span>:
-<span style="background-color: #151823;"> </span>   <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">child process</span>
-<span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">for</span> task <span style="color: #b6a0ff;">in</span> part_b:
-<span style="background-color: #151823;"> </span>   <span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">print</span>(f<span style="color: #79a8ff;">"I am process {os.getpid()} working on task {task}"</span>)
-<span style="background-color: #151823;"> </span>   <span style="background-color: #151823;"> </span>   time.sleep(.2)
-<span style="background-color: #151823;"> </span>   <span style="background-color: #151823;"> </span>   sys.stdout.flush()
-<span style="background-color: #151823;"> </span>   <span style="background-color: #151823;"> </span>   
+    <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">child process</span>
+    <span style="color: #b6a0ff;">for</span> task <span style="color: #b6a0ff;">in</span> part_b:
+        <span style="color: #f78fe7;">print</span><span style="color: #ffffff;">(</span>f<span style="color: #79a8ff;">"I am process </span>{os.getpid()}<span style="color: #79a8ff;"> working on task </span>{task}<span style="color: #79a8ff;">"</span><span style="color: #ffffff;">)</span>
+        time.sleep<span style="color: #ffffff;">(</span>.<span style="color: #00bcff;">2</span><span style="color: #ffffff;">)</span>
+        sys.stdout.flush<span style="color: #ffffff;">()</span>
+
 </pre>
 </div>
 
@@ -160,16 +160,16 @@ different, we know we are in the child process.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-python">I am process 22901 working on task 5
-I am process 22902 working on task 0
-I am process 22901 working on task 6
-I am process 22902 working on task 1
-I am process 22902 working on task 2
-I am process 22901 working on task 7
-I am process 22901 working on task 8
-I am process 22902 working on task 3
-I am process 22901 working on task 9
-I am process 22902 working on task 4
+<pre class="src src-python">I am process <span style="color: #00bcff;">18377</span> working on task <span style="color: #00bcff;">0</span>
+I am process <span style="color: #00bcff;">18376</span> working on task <span style="color: #00bcff;">5</span>
+I am process <span style="color: #00bcff;">18377</span> working on task <span style="color: #00bcff;">1</span>
+I am process <span style="color: #00bcff;">18376</span> working on task <span style="color: #00bcff;">6</span>
+I am process <span style="color: #00bcff;">18377</span> working on task <span style="color: #00bcff;">2</span>
+I am process <span style="color: #00bcff;">18376</span> working on task <span style="color: #00bcff;">7</span>
+I am process <span style="color: #00bcff;">18376</span> working on task <span style="color: #00bcff;">8</span>
+I am process <span style="color: #00bcff;">18377</span> working on task <span style="color: #00bcff;">3</span>
+I am process <span style="color: #00bcff;">18376</span> working on task <span style="color: #00bcff;">9</span>
+I am process <span style="color: #00bcff;">18377</span> working on task <span style="color: #00bcff;">4</span>
 </pre>
 </div>
 
@@ -192,20 +192,20 @@ see it'll get quite a bit more complicated. Enter the
 <span style="color: #b6a0ff;">import</span> time
 <span style="color: #b6a0ff;">import</span> os
 
-<span style="color: #00d3d0;">tasks</span> = <span style="color: #f78fe7;">range</span>(10)
-<span style="color: #00d3d0;">start</span> = time.time()
+<span style="color: #00d3d0;">tasks</span> = <span style="color: #f78fe7;">range</span><span style="color: #ffffff;">(</span><span style="color: #00bcff;">10</span><span style="color: #ffffff;">)</span>
+<span style="color: #00d3d0;">start</span> = time.time<span style="color: #ffffff;">()</span>
 
 
-<span style="color: #b6a0ff;">def</span> <span style="color: #feacd0;">do_work</span>(task):
-<span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">print</span>(f<span style="color: #79a8ff;">"I am process {os.getpid()} working on task {task}"</span>)
-<span style="background-color: #151823;"> </span>   time.sleep(.2)
+<span style="color: #b6a0ff;">def</span> <span style="color: #feacd0;">do_work</span><span style="color: #ffffff;">(</span>task<span style="color: #ffffff;">)</span>:
+    <span style="color: #f78fe7;">print</span><span style="color: #ffffff;">(</span>f<span style="color: #79a8ff;">"I am process </span>{os.getpid()}<span style="color: #79a8ff;"> working on task </span>{task}<span style="color: #79a8ff;">"</span><span style="color: #ffffff;">)</span>
+    time.sleep<span style="color: #ffffff;">(</span>.<span style="color: #00bcff;">2</span><span style="color: #ffffff;">)</span>
 
 
-<span style="color: #b6a0ff;">with</span> ProcessPoolExecutor(max_workers=4) <span style="color: #b6a0ff;">as</span> pool:
-<span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">for</span> task <span style="color: #b6a0ff;">in</span> tasks:
-<span style="background-color: #151823;"> </span>   <span style="background-color: #151823;"> </span>   pool.submit(do_work, task)
+<span style="color: #b6a0ff;">with</span> ProcessPoolExecutor<span style="color: #ffffff;">(</span>max_workers=<span style="color: #00bcff;">4</span><span style="color: #ffffff;">)</span> <span style="color: #b6a0ff;">as</span> pool:
+    <span style="color: #b6a0ff;">for</span> task <span style="color: #b6a0ff;">in</span> tasks:
+        pool.submit<span style="color: #ffffff;">(</span>do_work, task<span style="color: #ffffff;">)</span>
 
-<span style="color: #b6a0ff;">print</span>(f<span style="color: #79a8ff;">"Main process done after {time.time() - start:.2f}s"</span>)
+<span style="color: #f78fe7;">print</span><span style="color: #ffffff;">(</span>f<span style="color: #79a8ff;">"Main process done after </span>{time.time() - start:.2f}<span style="color: #79a8ff;">s"</span><span style="color: #ffffff;">)</span>
 </pre>
 </div>
 
@@ -232,17 +232,7 @@ tasks take 3 * 0.2 seconds to finish.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-python">I am process 22908 working on task 1
-I am process 22908 working on task 6
-I am process 22910 working on task 3
-I am process 22910 working on task 7
-I am process 22907 working on task 0
-I am process 22907 working on task 4
-I am process 22907 working on task 8
-I am process 22909 working on task 2
-I am process 22909 working on task 5
-I am process 22909 working on task 9
-Main process done after 0.61s
+<pre class="src src-python">
 </pre>
 </div>
 
@@ -273,9 +263,9 @@ with it</li>
 </div>
 </div>
 
-<div id="outline-container-org2fb5850" class="outline-3">
-<h3 id="org2fb5850">Collecting return values</h3>
-<div class="outline-text-3" id="text-org2fb5850">
+<div id="outline-container-org6424cf4" class="outline-3">
+<h3 id="org6424cf4">Collecting return values</h3>
+<div class="outline-text-3" id="text-org6424cf4">
 <p>
 In the examples above, I simply fired off the tasks and showed that
 they were doing something by printing statements to <a href="https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)">stdout</a>. But in a
@@ -289,13 +279,13 @@ can write quite a bit of python code without encountering these.
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #b6a0ff;">from</span> concurrent.futures <span style="color: #b6a0ff;">import</span> ProcessPoolExecutor
 
-<span style="color: #b6a0ff;">def</span> <span style="color: #feacd0;">work</span>(word):
-<span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">print</span>(word)
-<span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">return</span> <span style="color: #f78fe7;">len</span>(word)
+<span style="color: #b6a0ff;">def</span> <span style="color: #feacd0;">work</span><span style="color: #ffffff;">(</span>word<span style="color: #ffffff;">)</span>:
+    <span style="color: #f78fe7;">print</span><span style="color: #ffffff;">(</span>word<span style="color: #ffffff;">)</span>
+    <span style="color: #b6a0ff;">return</span> <span style="color: #f78fe7;">len</span><span style="color: #ffffff;">(</span>word<span style="color: #ffffff;">)</span>
 
-<span style="color: #b6a0ff;">with</span> ProcessPoolExecutor(max_workers=1) <span style="color: #b6a0ff;">as</span> pool:
-<span style="background-color: #151823;"> </span>   <span style="color: #00d3d0;">result</span> = pool.submit(work, <span style="color: #79a8ff;">"hello"</span>)
-<span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">print</span>(result)
+<span style="color: #b6a0ff;">with</span> ProcessPoolExecutor<span style="color: #ffffff;">(</span>max_workers=<span style="color: #00bcff;">1</span><span style="color: #ffffff;">)</span> <span style="color: #b6a0ff;">as</span> pool:
+    result = pool.submit<span style="color: #ffffff;">(</span>work, <span style="color: #79a8ff;">"hello"</span><span style="color: #ffffff;">)</span>
+    <span style="color: #f78fe7;">print</span><span style="color: #ffffff;">(</span>result<span style="color: #ffffff;">)</span>
 </pre>
 </div>
 
@@ -341,22 +331,22 @@ seen often is the following:
 <pre class="src src-python"><span style="color: #b6a0ff;">from</span> concurrent.futures <span style="color: #b6a0ff;">import</span> ProcessPoolExecutor
 <span style="color: #b6a0ff;">import</span> time
 
-<span style="color: #00d3d0;">tasks</span> = <span style="color: #f78fe7;">range</span>(10)
-<span style="color: #00d3d0;">results</span> = <span style="color: #f78fe7;">list</span>()
-<span style="color: #00d3d0;">start</span> = time.time()
+<span style="color: #00d3d0;">tasks</span> = <span style="color: #f78fe7;">range</span><span style="color: #ffffff;">(</span><span style="color: #00bcff;">10</span><span style="color: #ffffff;">)</span>
+<span style="color: #00d3d0;">results</span> = <span style="color: #f78fe7;">list</span><span style="color: #ffffff;">()</span>
+<span style="color: #00d3d0;">start</span> = time.time<span style="color: #ffffff;">()</span>
 
 
-<span style="color: #b6a0ff;">def</span> <span style="color: #feacd0;">do_work</span>(task):
-<span style="background-color: #151823;"> </span>   time.sleep(0.1)
-<span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">return</span> task ** 2
+<span style="color: #b6a0ff;">def</span> <span style="color: #feacd0;">do_work</span><span style="color: #ffffff;">(</span>task<span style="color: #ffffff;">)</span>:
+    time.sleep<span style="color: #ffffff;">(</span><span style="color: #00bcff;">0</span>.<span style="color: #00bcff;">1</span><span style="color: #ffffff;">)</span>
+    <span style="color: #b6a0ff;">return</span> task ** <span style="color: #00bcff;">2</span>
 
 
-<span style="color: #b6a0ff;">with</span> ProcessPoolExecutor(max_workers=10) <span style="color: #b6a0ff;">as</span> pool:
-<span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">for</span> task <span style="color: #b6a0ff;">in</span> tasks:
-<span style="background-color: #151823;"> </span>   <span style="background-color: #151823;"> </span>   <span style="color: #00d3d0;">future</span> = pool.submit(do_work, task)
-<span style="background-color: #151823;"> </span>   <span style="background-color: #151823;"> </span>   results.append(future.result())  <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">collect results</span>
+<span style="color: #b6a0ff;">with</span> ProcessPoolExecutor<span style="color: #ffffff;">(</span>max_workers=<span style="color: #00bcff;">10</span><span style="color: #ffffff;">)</span> <span style="color: #b6a0ff;">as</span> pool:
+    <span style="color: #b6a0ff;">for</span> task <span style="color: #b6a0ff;">in</span> tasks:
+        future = pool.submit<span style="color: #ffffff;">(</span>do_work, task<span style="color: #ffffff;">)</span>
+        results.append<span style="color: #ffffff;">(</span>future.result<span style="color: #ff62d4;">()</span><span style="color: #ffffff;">)</span>  <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">collect results</span>
 
-<span style="color: #b6a0ff;">print</span>(f<span style="color: #79a8ff;">"Done after {time.time() - start}"</span>)
+<span style="color: #f78fe7;">print</span><span style="color: #ffffff;">(</span>f<span style="color: #79a8ff;">"Done after </span>{time.time() - start}<span style="color: #79a8ff;">"</span><span style="color: #ffffff;">)</span>
 </pre>
 </div>
 
@@ -373,7 +363,7 @@ tasks are run in succession.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-python">Done after 1.0320849418640137
+<pre class="src src-python">
 </pre>
 </div>
 
@@ -391,25 +381,25 @@ context is done scheduling the tasks.
 <pre class="src src-python"><span style="color: #b6a0ff;">from</span> concurrent.futures <span style="color: #b6a0ff;">import</span> ProcessPoolExecutor
 <span style="color: #b6a0ff;">import</span> time
 
-<span style="color: #00d3d0;">start</span> = time.time()
+<span style="color: #00d3d0;">start</span> = time.time<span style="color: #ffffff;">()</span>
 
-<span style="color: #00d3d0;">tasks</span> = <span style="color: #f78fe7;">range</span>(10)
-<span style="color: #00d3d0;">futures</span> = <span style="color: #f78fe7;">list</span>()
-
-
-<span style="color: #b6a0ff;">def</span> <span style="color: #feacd0;">do_work</span>(task):
-<span style="background-color: #151823;"> </span>   time.sleep(0.1)
-<span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">return</span> task ** 2
+<span style="color: #00d3d0;">tasks</span> = <span style="color: #f78fe7;">range</span><span style="color: #ffffff;">(</span><span style="color: #00bcff;">10</span><span style="color: #ffffff;">)</span>
+<span style="color: #00d3d0;">futures</span> = <span style="color: #f78fe7;">list</span><span style="color: #ffffff;">()</span>
 
 
-<span style="color: #b6a0ff;">with</span> ProcessPoolExecutor(max_workers=10) <span style="color: #b6a0ff;">as</span> pool:
-<span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">for</span> task <span style="color: #b6a0ff;">in</span> tasks:
-<span style="background-color: #151823;"> </span>   <span style="background-color: #151823;"> </span>   futures.append(pool.submit(do_work, task))
+<span style="color: #b6a0ff;">def</span> <span style="color: #feacd0;">do_work</span><span style="color: #ffffff;">(</span>task<span style="color: #ffffff;">)</span>:
+    time.sleep<span style="color: #ffffff;">(</span><span style="color: #00bcff;">0</span>.<span style="color: #00bcff;">1</span><span style="color: #ffffff;">)</span>
+    <span style="color: #b6a0ff;">return</span> task ** <span style="color: #00bcff;">2</span>
 
-<span style="color: #00d3d0;">results</span> = [future.result() <span style="color: #b6a0ff;">for</span> future <span style="color: #b6a0ff;">in</span> futures]
 
-<span style="color: #b6a0ff;">print</span>(results)
-<span style="color: #b6a0ff;">print</span>(f<span style="color: #79a8ff;">"Done after {time.time() - start}"</span>)
+<span style="color: #b6a0ff;">with</span> ProcessPoolExecutor<span style="color: #ffffff;">(</span>max_workers=<span style="color: #00bcff;">10</span><span style="color: #ffffff;">)</span> <span style="color: #b6a0ff;">as</span> pool:
+    <span style="color: #b6a0ff;">for</span> task <span style="color: #b6a0ff;">in</span> tasks:
+        futures.append<span style="color: #ffffff;">(</span>pool.submit<span style="color: #ff62d4;">(</span>do_work, task<span style="color: #ff62d4;">)</span><span style="color: #ffffff;">)</span>
+
+results = <span style="color: #ffffff;">[</span>future.result<span style="color: #ff62d4;">()</span> <span style="color: #b6a0ff;">for</span> future <span style="color: #b6a0ff;">in</span> futures<span style="color: #ffffff;">]</span>
+
+<span style="color: #f78fe7;">print</span><span style="color: #ffffff;">(</span>results<span style="color: #ffffff;">)</span>
+<span style="color: #f78fe7;">print</span><span style="color: #ffffff;">(</span>f<span style="color: #79a8ff;">"Done after </span>{time.time() - start}<span style="color: #79a8ff;">"</span><span style="color: #ffffff;">)</span>
 </pre>
 </div>
 
@@ -419,16 +409,15 @@ context is done scheduling the tasks.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-python">[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
-Done after 0.1123654842376709
+<pre class="src src-python">
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgd8669f7" class="outline-3">
-<h3 id="orgd8669f7">Dealing with exceptions in child processes</h3>
-<div class="outline-text-3" id="text-orgd8669f7">
+<div id="outline-container-org1d86d84" class="outline-3">
+<h3 id="org1d86d84">Dealing with exceptions in child processes</h3>
+<div class="outline-text-3" id="text-org1d86d84">
 <p>
 If a child process raises a unhandled <code>Exception</code>, this exception is
 passed to the main process when calling <code>Future.result</code>. In the
@@ -441,46 +430,44 @@ the results of the process workers.
 </pre>
 </div>
 
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #b6a0ff;">from</span> concurrent.futures <span style="color: #b6a0ff;">import</span> ProcessPoolExecutor
-<span style="color: #b6a0ff;">from</span> random <span style="color: #b6a0ff;">import</span> random
+<pre class="example">
+from concurrent.futures import ProcessPoolExecutor
+from random import random
 
-<span style="color: #00d3d0;">tasks</span> = <span style="color: #f78fe7;">range</span>(10)
-<span style="color: #00d3d0;">futures</span> = <span style="color: #f78fe7;">list</span>()
-
-
-<span style="color: #b6a0ff;">def</span> <span style="color: #feacd0;">do_work</span>(task):
-<span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">if</span> random() &gt; .5:
-<span style="background-color: #151823;"> </span>   <span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">return</span> task ** 2
-<span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">else</span>:
-<span style="background-color: #151823;"> </span>   <span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">raise</span> <span style="color: #6ae4b9;">Exception</span>(<span style="color: #79a8ff;">"OW!"</span>)
+tasks = range(10)
+futures = list()
 
 
-<span style="color: #b6a0ff;">with</span> ProcessPoolExecutor(max_workers=10) <span style="color: #b6a0ff;">as</span> pool:
-<span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">for</span> task <span style="color: #b6a0ff;">in</span> tasks:
-<span style="background-color: #151823;"> </span>   <span style="background-color: #151823;"> </span>   futures.append(pool.submit(do_work, task))
+def do_work(task):
+    if random() &gt; .5:
+        return task ** 2
+    else:
+        raise Exception("OW!")
 
-<span style="color: #00d3d0;">results</span> = <span style="color: #f78fe7;">list</span>()
 
-<span style="color: #b6a0ff;">for</span> future <span style="color: #b6a0ff;">in</span> futures:
-<span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">try</span>:
-<span style="background-color: #151823;"> </span>   <span style="background-color: #151823;"> </span>   results.append(future.result())
-<span style="background-color: #151823;"> </span>   <span style="color: #b6a0ff;">except</span> <span style="color: #6ae4b9;">Exception</span> <span style="color: #b6a0ff;">as</span> e:
-<span style="background-color: #151823;"> </span>   <span style="background-color: #151823;"> </span>   results.append(f<span style="color: #79a8ff;">"Failed with {e}!"</span>)
+with ProcessPoolExecutor(max_workers=10) as pool:
+    for task in tasks:
+        futures.append(pool.submit(do_work, task))
 
-<span style="color: #b6a0ff;">print</span>(results)
+results = list()
+
+for future in futures:
+    try:
+        results.append(future.result())
+    except Exception as e:
+        results.append(f"Failed with {e}!")
+
+print(results)
 </pre>
-</div>
 
 <div class="org-src-container">
 <pre class="src src-bash">python ./src/error_example.py
 </pre>
 </div>
 
-<div class="org-src-container">
-<pre class="src src-python">[0, <span style="color: #79a8ff;">'Failed with OW!!'</span>, <span style="color: #79a8ff;">'Failed with OW!!'</span>, 9, <span style="color: #79a8ff;">'Failed with OW!!'</span>, 25, 36, <span style="color: #79a8ff;">'Failed with OW!!'</span>, <span style="color: #79a8ff;">'Failed with OW!!'</span>, 81]
+<pre class="example">
+[0, 1, 4, 9, 16, 'Failed with OW!!', 'Failed with OW!!', 'Failed with OW!!', 64, 81]
 </pre>
-</div>
 
 <p>
 Thanks for reading! If you want to reach out, post an issue to the
