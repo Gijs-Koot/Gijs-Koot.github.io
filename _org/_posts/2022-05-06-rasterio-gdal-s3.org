@@ -89,16 +89,18 @@ aws s3 ls s3://heights-tiles/tiles/sd980
 #+end_src
 
 #+RESULTS:
-| 2022-04-29 | 23:08:55 | 2903641 | sd9800_DSM_1M.tiff |
-| 2022-04-29 | 23:08:54 | 2871755 | sd9801_DSM_1M.tiff |
-| 2022-04-29 | 23:08:54 | 2938302 | sd9802_DSM_1M.tiff |
-| 2022-04-29 | 23:08:55 | 2719476 | sd9803_DSM_1M.tiff |
-| 2022-04-29 | 23:08:55 | 2643684 | sd9804_DSM_1M.tiff |
-| 2022-04-29 | 23:08:55 | 2533681 | sd9805_DSM_1M.tiff |
-| 2022-04-29 | 23:08:55 | 2715498 | sd9806_DSM_1M.tiff |
-| 2022-04-29 | 23:08:55 | 2818095 | sd9807_DSM_1M.tiff |
-| 2022-04-29 | 23:08:55 | 2755601 | sd9808_DSM_1M.tiff |
-| 2022-04-29 | 23:08:56 |  468739 | sd9809_DSM_1M.tiff |
+#+begin_src bash
+ 2022-04-29  23:08:55  2903641  sd9800_DSM_1M.tiff 
+ 2022-04-29  23:08:54  2871755  sd9801_DSM_1M.tiff 
+ 2022-04-29  23:08:54  2938302  sd9802_DSM_1M.tiff 
+ 2022-04-29  23:08:55  2719476  sd9803_DSM_1M.tiff 
+ 2022-04-29  23:08:55  2643684  sd9804_DSM_1M.tiff 
+ 2022-04-29  23:08:55  2533681  sd9805_DSM_1M.tiff 
+ 2022-04-29  23:08:55  2715498  sd9806_DSM_1M.tiff 
+ 2022-04-29  23:08:55  2818095  sd9807_DSM_1M.tiff 
+ 2022-04-29  23:08:55  2755601  sd9808_DSM_1M.tiff 
+ 2022-04-29  23:08:56   468739  sd9809_DSM_1M.tiff 
+#+end_src
 
 When doing a calculation, we're typically not interested in the whole of the
 tile. For example, we only want to know the height of a single pixel in the
