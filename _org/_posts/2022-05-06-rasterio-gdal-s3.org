@@ -16,7 +16,12 @@ At SpotR, we make heavy use of rasterdata containing gridded height measurements
 
 When working in ~python~, the [[https://rasterio.readthedocs.io/en/latest/index.html][~rasterio~]] package is useful. This package is
 essentially a more pythonic binding to the GDAl library, as explained in their [[https://rasterio.readthedocs.io/en/latest/intro.html][
-introduction]].
+introduction]]. The file below was obtained from [[https://data.gov.uk/dataset/f0db0249-f17b-4036-9e65-309148c97ce4/national-lidar-programme][data.gov.uk]] and shows a 1x1km
+patch of height measurements in the UK. The resolution is 1000x1000 pixels,
+every pixel represents the (maximum) height of 1x1m. The lighter dots along the
+top of the image are houses, there are some ragged parts where there is no data.
+In the middle there is a depression, could be a riverbed, and then at the bottom
+the terrain is rising a little.
 
 #+begin_src python :results file
 import rasterio
@@ -41,10 +46,11 @@ fn
 [[file:images/heights.png]]
 
 Rastertiles, typically GeoTiff files, can become quite large in terms of memory
-size. This grid above takes up around ~4Mb as an uncompressed GeoTiff file, down
-from 6.5Mb as a ~.asc~ file, which is a simple text-based format. There are a
-couple of interesting compression techniques like [[https://en.wikipedia.org/wiki/Deflate][DEFLATE]] and [[https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch][LZW]] that can bring
-the size of the data down further.
+size. This grid above takes up \~4Mb as an uncompressed GeoTiff file, down from
+6.5Mb as a ~.asc~ file, which is a simple text-based format. There are a couple
+of interesting compression techniques like [[https://en.wikipedia.org/wiki/Deflate][DEFLATE]] and [[https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch][LZW]] that can bring the
+size of the data down further. It is possible to convert rasters with
+~rasterio~, but the ~gdal_translate~ utility is the tool for the job.
 
 #+begin_src bash
 gdal_translate /tmp/sd9863_DSM_1M.asc /tmp/sd9863_DSM_1M.tiff > /dev/null
@@ -55,11 +61,13 @@ ls -lha /tmp/sd*
 #+end_src
 
 #+RESULTS:
-| -rw-rw-r-- 1 gijs gijs 6 | 5M mei  6 13:37 /tmp/sd9863_DSM_1M.asc           |
-| -rw-rw-r-- 1 gijs gijs 1 | 1M mei  6 16:45 /tmp/sd9863_DSM_1M_def_pred.tiff |
-| -rw-rw-r-- 1 gijs gijs 1 | 5M mei  6 16:45 /tmp/sd9863_DSM_1M_def.tiff      |
-| -rw-rw-r-- 1 gijs gijs 1 | 8M mei  6 16:45 /tmp/sd9863_DSM_1M_lzw.tiff      |
-| -rw-rw-r-- 1 gijs gijs 3 | 9M mei  6 16:45 /tmp/sd9863_DSM_1M.tiff          |
+#+begin_src bash
+-rw-rw-r-- 1 gijs gijs 6,5M jun 13  2018 /tmp/sd9863_DSM_1M.asc
+-rw-rw-r-- 1 gijs gijs 1,1M mei  9 09:11 /tmp/sd9863_DSM_1M_def_pred.tiff
+-rw-rw-r-- 1 gijs gijs 1,5M mei  9 09:11 /tmp/sd9863_DSM_1M_def.tiff
+-rw-rw-r-- 1 gijs gijs 1,8M mei  9 09:11 /tmp/sd9863_DSM_1M_lzw.tiff
+-rw-rw-r-- 1 gijs gijs 3,9M mei  9 09:11 /tmp/sd9863_DSM_1M.tiff
+#+end_src
 
 Interestingly, all compression techniques available in ~GDAL~ are lossless.
 There are JPEG based compression systems, but they can only be applied to 8bit
