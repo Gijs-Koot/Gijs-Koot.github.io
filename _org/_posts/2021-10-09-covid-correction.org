@@ -1,0 +1,47 @@
+#+BEGIN_EXPORT html
+---
+layout: post
+title: Adjusting age group for local vaccination rate (2)
+date: 2021-10-09
+published: true
+categories: julia statistics covid
+---
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+#+END_EXPORT
+
+* Adjusting percentages for local vaccination rate
+#+OPTIONS: toc:nil num:nil
+#+PROPERTY: header-args:ess-julia :exports both :session *julia* :eval never-export
+
+This is an answer to a [[https://stats.stackexchange.com/questions/546774/how-to-combine-state-level-covid-19-vaccination-rates-with-national-demographic][question]] on Stats Overflow. 
+
+I want to estimate the probability of a person aged 40-49 in Delaware
+to be vaccinated, but I only have nationwide statistics on vaccination
+levels by age, and a level of vaccination in Delaware, but no age
+breakdown for that state. So the question is, how can we combine those
+percentages, for the agegroup and Delaware, into a specific percentage
+for that agegroup in Delaware?
+
+I tried doing that in my
+#+BEGIN_EXPORT html
+<a href="{{page.previous.url}}">previous</a>
+#+END_EXPORT
+post, but, I came up with a more straightforward method.
+
+To begin, from the [[https://covid.cdc.gov/covid-data-tracker/#vaccinations_vacc-total-admin-rate-total][official statistics]], we get the percentage of
+people vaccinated in Delaware, which is 56.6%. Let $D$ be the total
+population of Delaware. Then there are $0.566 \cdot D$ vaccinated
+persons in Delaware.
+
+The number of people in the US in the age group 40-49 is 12.2%. But
+they make up 14.2% percent of the people vaccinated. Let's assume
+these percentages hold in Delaware as well.
+
+Then the total number of people aged 40-49 living in Delaware is
+$0.122\cdot D$. And the number of people vaccinated aged between 40-49
+is 14.2% of vaccinated subjects. So the final percentage is
+
+$$
+\frac{0.142 \cdot 0.566 \cdot D}{0.122 \cdot D} = \frac{.142 \cdot .566}{0.122} \approx 65.9\%
+$$

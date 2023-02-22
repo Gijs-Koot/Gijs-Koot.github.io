@@ -1,0 +1,55 @@
+#+OPTIONS: toc:nil num:nil broken-links:t
+#+PROPERTY: header-args:python :exports both :session *python* :eval never-export
+#+PROPERTY: header-args:bash :results src code :eval never-export :exports both
+#+BEGIN_EXPORT html
+---
+layout: post
+title: Partial batch failure with SQS driven Lambda functions
+date: 2022-05-09
+published: true
+categories: AWS SQS 
+---
+
+#+END_EXPORT
+
+When you have a lambda that is driven by a SQS queue, like [[https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html][this]], your lambda can
+receive up to ten messages per batch. Your handler can look like this, handling
+all of the messages in a single event in a for loop.
+
+#+begin_src python
+def lambda_handler(event: dict, context: dict) -> None:
+    for msg in event["Records"]:
+        handle_msg(msg)
+#+end_src
+
+If you do nothing and all messages are handled without exceptions, the messages
+will be deleted from the SQS queue automatically for you. Logically, if there is
+an error, the messages will not be deleted. They will be put back to the queue,
+or, depending on the arrangement, they will be sent to the [[https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html][dead letter queue]].
+But if your handler function raises an exception, the whole batch will be
+failed, including the messages that have been processed already. This is
+typically not the behaviour you want, and to solve this you have to delete or
+put messages to the queue, keeping track of the failures and succesfully handled
+messages yourself. This is not very obvious, and you can find some questions on
+how to handle this properly [[https://stackoverflow.com/questions/55497907/how-do-i-fail-a-specific-sqs-message-in-a-batch-from-a-lambda][here]] and [[https://stackoverflow.com/questions/56234199/splittling-sqs-lambda-batch-into-partial-success-partial-failure][here.]]
+
+AWS has introduced a new possibility for handling this, pretty recently, in
+[[https://aws.amazon.com/about-aws/whats-new/2021/11/aws-lambda-partial-batch-response-sqs-event-source/][December 2021]]. If you include the failed messages in a lambda response called
+~batchItemFailures~, only those will be reposted to the queue (or the dead
+letter queue). In ~python~, this looks like this. 
+
+#+begin_src python
+def lambda_handler(event: dict, context: dict) -> dict:
+    batch_item_failures = []  # list of things that failed
+
+    for msg in event["Records"]:
+        try:
+            handle_msg(msg)
+        except Exception as e:  # more specific is better
+            batch_item_failures.append(msg["messageId"])
+
+    return {
+        "batchItemFailures": batch_item_failures
+    }
+#+end_src
+
